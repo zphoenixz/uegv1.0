@@ -4,7 +4,8 @@
   "description": "Sistema Acdemico",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/zphoenixz/uegv1.0#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "hbs": "^4.0.1",
     "request": "^2.87.0"
   }
 }

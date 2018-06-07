@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Unidad Educativa Gualberto Villarroel</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../assets/demo/demo.css" rel="stylesheet" />
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body class="">
+        <div class="sidebar" data-color="orange">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+            <div class="logo">
+                <a class="simple-text logo-mini">
+                    U.E
+                </a>
+                <a class="simple-text logo-normal">
+                    Gualberto Villarroel
+                </a>
+				                <center><img src="../assets/img//escudo.png" width="187" height="224"></center>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="../usuario/dashboard_usuario.html">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Inicio</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../usuario/comunicados.html">
+                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <p>Comunicados</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../usuario/entrevistas.html">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Entrevistas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../usuario/user.html">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>Notas</p>
+                        </a>
+                    </li>					
+                    <li>
+                        <a href="../usuario/contactos.html">
+                            <i class="now-ui-icons location_map-big"></i>
+                            <p>Contactos</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <SCRIPT  language=JavaScript> 
+                    function go(){
+                    if (document.form.pass.value=='profesor' && document.form.user.value=='profesor'){ 
+                         //  window.location="../usuario/dashboard_notas.html"; 
+                         location.href ="dashboard_notas.html";
+                        } 
+                        else{ 
+                             alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
+                        } 
+                    } 
+                    </SCRIPT>
+            <!-- End Navbar -->
+            
+            <div class="content">
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+  
+                    <div class="login-wrap">
+                            <div class="login-html">
+                                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Iniciar Sesión</label>
+                                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
+                                <div class="login-form">
+                                    <div class="sign-in-htm">
+                                        <form  name=form >
+                                                    <div class="group">
+                                                        <label for="user" class="label">Carnet de Identidad</label>
+                                                        <input  name="user" type="text" class="input">
+                                                    </div>
+                                                    <div class="group">
+                                                        <label for="pass" class="label">Contraseña</label>
+                                                        <input  name="pass" type="password" class="input" data-type="password">
+                                                    </div>
+                                                    <div class="group">
+                                                        <input id="check" type="checkbox" class="check" checked>
+                                                        <label for="check"><span class="icon"></span> Mantenerme registrado</label>
+                                                    </div>
+                                                    <div class="group">
+                                                        <input type="submit" class="button"  onclick=go() value="Ingresar">
+                                                    </div>
+                                                    <div class="hr"></div>
+                                                    <div class="foot-lnk">
+                                                        <a href="#forgot">¿Olvidó su contraseña?</a>
+                                                    </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                     </div>
+                 </div> 
+            </div>   
+        </div>     
+                        
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<!--   Core JS Files   -->
+<!--script src="../assets/js/core/jquery.min.js"></script-->
+<!--script src="../assets/js/core/popper.min.js"></script-->
+<!--script src="../assets/js/core/bootstrap.min.js"></script-->
+<!--script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script-->
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<!--script src="../assets/js/plugins/chartjs.min.js"></script-->
+<!--  Notifications Plugin    -->
+<!--script src="../assets/js/plugins/bootstrap-notify.js"></script-->
+<!-- Control Center for Now Ui dashboard: parallax effects, scripts for the example pages etc -->
+<!--script src="../assets/js/now-ui-dashboard.js?v=1.0.1"></script-->
+<!-- Now Ui dashboard DEMO methods, don't include it in your project! -->
+<!--script src="../assets/demo/demo.js"></script-->
+
+</html>
