@@ -5,7 +5,8 @@ var app = express();
 
 const port = process.env.PORT || 3000;
 //---------------------------------------------------------------------------------
-hbs.registerPartials(__dirname + '/views/partials');
+//hbs.registerPartials(__dirname + '/views/partials');
+//app.set('views', __dirname + '/hbs');
 app.set('View engine', 'hbs');//HTML mustache Handlebar
                                 
 // app.use((req, res, next) => {//next existe para que puedas decirle a express    
@@ -23,7 +24,7 @@ app.set('View engine', 'hbs');//HTML mustache Handlebar
 // });
 
 //**Sitio en mantenimiento */
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 //---------------------------------------------------------------------------------
                                     
 //---------------------------------------------------------------------------------
@@ -44,25 +45,25 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/about', (req, res) => {//Usando HBS, about.hbs
-    //res.send('About Page');
-    res.render('about.hbs', {
-        VariableTitulo: 'About Page',
-        //AnhoActual: new Date().getFullYear()
-    });
-});
+// app.get('/about', (req, res) => {//Usando HBS, about.hbs
+//     //res.send('About Page');
+//     res.render('about.hbs', {
+//         VariableTitulo: 'About Page',
+//         //AnhoActual: new Date().getFullYear()
+//     });
+// });
 
-app.get('/projects', (req, res) => {
-    res.render('projects.hbs', {
-        VariableTitulo: 'Proyectos',
-    });
-});
+// app.get('/projects', (req, res) => {
+//     res.render('projects.hbs', {
+//         VariableTitulo: 'Proyectos',
+//     });
+// });
 
-app.get('/bad', (req, res) => {
-    res.send({//Mando un JSON de mensaje de error
-        errorMessage: 'Unable to handle request'
-    });
-});
+// app.get('/bad', (req, res) => {
+//     res.send({//Mando un JSON de mensaje de error
+//         errorMessage: 'Unable to handle request'
+//     });
+// });
 //---------------------------------------------------------------------------------
 
 app.listen(port, () => {
