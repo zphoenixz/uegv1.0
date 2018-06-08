@@ -52,6 +52,70 @@ app.get('/notas', (req, res) => {
 
     });
 });
+//------------------------------------------------MENU DEL PROFESOR
+app.get('/dashboard_prof', (req, res) => {
+    res.render('dashboard_prof.hbs', {
+
+    });
+});
+app.get('/comunicados_prof', (req, res) => {
+    res.render('comunicados_prof.hbs', {
+
+    });
+});
+app.get('/listas_prof', (req, res) => {
+    res.render('listas_prof.hbs', {
+
+    });
+});
+app.get('/horarios_prof', (req, res) => {
+    res.render('horarios_prof.hbs', {
+
+    });
+});
+app.get('/entrevistas_prof', (req, res) => {
+    res.render('entrevistas_prof.hbs', {
+
+    });
+});
+//------------------------------------------------MENU DEL SECRETARIO
+//------------------------------------------------MENU DEL PROFESOR
+app.get('/dashboard_sec', (req, res) => {
+    res.render('dashboard_sec.hbs', {
+
+    });
+});
+app.get('/personal', (req, res) => {
+    res.render('personal.hbs', {
+
+    });
+});
+app.get('/entrevistas_sec', (req, res) => {
+    res.render('entrevistas_sec.hbs', {
+
+    });
+});
+app.get('/comunicados_sec', (req, res) => {
+    res.render('comunicados_sec.hbs', {
+
+    });
+});
+app.get('/horarios_sec', (req, res) => {
+    res.render('horarios_sec.hbs', {
+
+    });
+});
+app.get('/notas_sec', (req, res) => {
+    res.render('notas_sec.hbs', {
+
+    });
+});
+app.get('/listas_sec', (req, res) => {
+    res.render('listas_sec.hbs', {
+
+    });
+});
+//------------------------------------------------MENU DEL SECRETARIO
 // app.get('/projects', (req, res) => {
 //     res.render('projects.hbs', {
 //         VariableTitulo: 'Proyectos',

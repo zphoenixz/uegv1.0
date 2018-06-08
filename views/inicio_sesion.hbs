@@ -71,16 +71,19 @@
                 /*function redirigir(){
                     setTimeout('go()', 10000);
                 }*/
-                
                 function go(){
-                        if (document.form.pass.value=="profesor" && document.form.user.value=="profesor"){ 
-                            alert("Login Correcto"); 
-                            window.location.href ="/";
-                            alert(""); 
-                        } 
-                        else{ 
-                             alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
-                        } 
+                    if (document.form.pass.value=="profesor" && document.form.user.value=="profesor"){ 
+                        alert("Bienvenido Profesor"); 
+                        window.location.href ="/dashboard_prof";
+                        alert(""); 
+                    }else if (document.form.pass.value=="secre" && document.form.user.value=="secre"){ 
+                        alert("Bienvenido Administrativo"); 
+                        window.location.href ="/dashboard_sec";
+                        alert(""); 
+                    } 
+                    else{ 
+                            alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
+                    } 
                 } 
             </SCRIPT>
             <!-- End Navbar -->
