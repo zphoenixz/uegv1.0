@@ -21,9 +21,6 @@
 
 <body class="">
         <div class="sidebar" data-color="orange">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-    -->
             <div class="logo">
                 <a class="simple-text logo-mini">
                     U.E
@@ -31,7 +28,7 @@
                 <a class="simple-text logo-normal">
                     Gualberto Villarroel
                 </a>
-				                <center><img src="img//escudo.png" width="187" height="224"></center>
+				                <center><img src="img/escudo.png" width="187" height="224"></center>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
@@ -40,7 +37,7 @@
                             <i class="now-ui-icons design_app"></i>
                             <p>Inicio</p>
                         </a>
-                    </li>
+                    </li >
                     <li>
                         <a href="/comunicados">
                             <i class="now-ui-icons ui-1_bell-53"></i>
@@ -71,12 +68,15 @@
         <div class="main-panel">
             <!-- Navbar -->
             <SCRIPT  language=JavaScript> 
+                /*function redirigir(){
+                    setTimeout('go()', 10000);
+                }*/
+                
                 function go(){
                         if (document.form.pass.value=="profesor" && document.form.user.value=="profesor"){ 
-                         //  window.location="../usuario/dashboard_notas.html"; 
-                         //location.href ="dashboard_notas.html";
-                         window.location.href ="/";
-                         alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
+                            alert("Login Correcto"); 
+                            window.location.href ="/";
+                            alert(""); 
                         } 
                         else{ 
                              alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
