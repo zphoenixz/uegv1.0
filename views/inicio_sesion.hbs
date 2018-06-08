@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
@@ -36,31 +36,31 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="active">
-                        <a href="../usuario/dashboard_usuario.html">
+                        <a href="/">
                             <i class="now-ui-icons design_app"></i>
                             <p>Inicio</p>
                         </a>
                     </li>
                     <li>
-                        <a href="../usuario/comunicados.html">
+                        <a href="/comunicados">
                             <i class="now-ui-icons ui-1_bell-53"></i>
                             <p>Comunicados</p>
                         </a>
                     </li>
                     <li>
-                        <a href="../usuario/entrevistas.html">
+                        <a href="/entrevistas">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             <p>Entrevistas</p>
                         </a>
                     </li>
                     <li>
-                        <a href="../usuario/user.html">
+                        <a href="/user">
                             <i class="now-ui-icons users_single-02"></i>
                             <p>Notas</p>
                         </a>
                     </li>					
                     <li>
-                        <a href="../usuario/contactos.html">
+                        <a href="/contactos">
                             <i class="now-ui-icons location_map-big"></i>
                             <p>Contactos</p>
                         </a>
@@ -71,16 +71,17 @@
         <div class="main-panel">
             <!-- Navbar -->
             <SCRIPT  language=JavaScript> 
-                    function go(){
-                    if (document.form.pass.value=='profesor' && document.form.user.value=='profesor'){ 
+                function go(){
+                        if (document.form.pass.value=="profesor" && document.form.user.value=="profesor"){ 
                          //  window.location="../usuario/dashboard_notas.html"; 
-                         location.href ="dashboard_notas.html";
+                         //location.href ="dashboard_notas.html";
+                         window.location.href ="/";
                         } 
                         else{ 
                              alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
                         } 
-                    } 
-                    </SCRIPT>
+                } 
+            </SCRIPT>
             <!-- End Navbar -->
             
             <div class="content">
@@ -132,22 +133,5 @@
         </div>
     </div>
 </body>
-
-
-<!--   Core JS Files   -->
-<!--script src="../assets/js/core/jquery.min.js"></script-->
-<!--script src="../assets/js/core/popper.min.js"></script-->
-<!--script src="../assets/js/core/bootstrap.min.js"></script-->
-<!--script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script-->
-<!--  Google Maps Plugin    -->
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!-- Chart JS -->
-<!--script src="../assets/js/plugins/chartjs.min.js"></script-->
-<!--  Notifications Plugin    -->
-<!--script src="../assets/js/plugins/bootstrap-notify.js"></script-->
-<!-- Control Center for Now Ui dashboard: parallax effects, scripts for the example pages etc -->
-<!--script src="../assets/js/now-ui-dashboard.js?v=1.0.1"></script-->
-<!-- Now Ui dashboard DEMO methods, don't include it in your project! -->
-<!--script src="../assets/demo/demo.js"></script-->
-
 </html>

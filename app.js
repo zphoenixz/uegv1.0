@@ -14,14 +14,6 @@ app.set('View engine', 'hbs');//HTML mustache Handlebar
 app.use(express.static(__dirname + '/public'));
 //---------------------------------------------------------------------------------
 app.get('/', (req, res) => {
-    // res.send('<h1>hello express!</h1>');//Mandar HTML como respuesta
-  /*   res.send({//Mandar JSON como respuesta
-        name: 'Andrew',
-        likes: [
-            'Biking',
-            'Cities'
-        ]
-    }); */
     res.render('dashboard_usuario.hbs', {
         //VariableTitulo: 'Hagan bien!!!',
         //VariableMsjBienvenida: '>:V',
@@ -29,14 +21,37 @@ app.get('/', (req, res) => {
     });
 });
 
-// app.get('/about', (req, res) => {//Usando HBS, about.hbs
-//     //res.send('About Page');
-//     res.render('about.hbs', {
-//         VariableTitulo: 'About Page',
-//         //AnhoActual: new Date().getFullYear()
-//     });
-// });
+app.get('/comunicados', (req, res) => {
+    res.render('comunicados.hbs', {
+        // VariableTitulo: 'About Page',
+        // //AnhoActual: new Date().getFullYear()
+    });
+});
+app.get('/entrevistas', (req, res) => {
+    res.render('entrevistas.hbs', {
 
+    });
+});
+app.get('/user', (req, res) => {
+    res.render('user.hbs', {
+
+    });
+});
+app.get('/contactos', (req, res) => {
+    res.render('contactos.hbs', {
+
+    });
+});
+app.get('/log_in', (req, res) => {
+    res.render('inicio_sesion.hbs', {
+
+    });
+});
+app.get('/notas', (req, res) => {
+    res.render('notas.hbs', {
+
+    });
+});
 // app.get('/projects', (req, res) => {
 //     res.render('projects.hbs', {
 //         VariableTitulo: 'Proyectos',
