@@ -1,18 +1,46 @@
+const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
-var app = express();
+const publicPath = path.join(__dirname,'../public');
+
+const {isRealString} = require('./utils/validation');
+const {validarUsuario} = require('./utils/validarUser');
 
 const port = process.env.PORT || 3000;
-//---------------------------------------------------------------------------------
-//hbs.registerPartials(__dirname + '/views/partials');
-//app.set('views', __dirname + '/hbs');
-app.use(express.static(__dirname + '/public'));
-app.set('View engine', 'hbs');//HTML mustache Handlebar
+//-----------------------------------N
+var app = express();
+var http = require('http');
+var socketIO = require('socket.io');
+
                                 
-//**Sitio en mantenimiento */
-app.use(express.static(__dirname + '/public'));
-//---------------------------------------------------------------------------------
+var server = http.createServer(app);
+var io = socketIO(server);
+//var io = require('socket.io').listen(server);
+app.use(express.static(publicPath));
+app.set('View engine', 'hbs');//HTML mustache Handlebar
+//------------------------------------
+
+
+
+
+io.on('connection', (socket) => {
+    socket.on('login', (params, callback) => {
+        if(!isRealString(params.user) || !isRealString(params.pass)){
+            callback('C.I. y Contraseña son requeridos!');
+        }else{
+            if(validarUsuario(params.user, params.pass) == 'profesor'){
+                callback('Bienvenido Profesor!','p');
+            }else if(validarUsuario(params.user, params.pass) == 'secretario'){
+                callback('Bienvenido Administrativo!','s');
+            }else{
+                callback('C.I. o Contraseña incorrectos!');
+            }
+        }
+    });
+});
+
+
 app.get('/', (req, res) => {
     res.render('dashboard_usuario.hbs', {
         //VariableTitulo: 'Hagan bien!!!',
@@ -42,7 +70,8 @@ app.get('/contactos', (req, res) => {
 
     });
 });
-app.get('/log_in', (req, res) => {
+app.get('/log_in', (req, res) => { //INICIAR SESIÓN
+
     res.render('inicio_sesion.hbs', {
 
     });
@@ -129,12 +158,12 @@ app.get('/listas_sec', (req, res) => {
 // });
 //---------------------------------------------------------------------------------
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is up on ${port}`);
 });
 
 //==================================================================MANEJAR ERRORES
 // catch 404 and forward to error handler
 
-  module.exports = app;
+ // module.exports = app;
   //------------------------------------------------------------------MANEJAR ERRORES

@@ -67,7 +67,7 @@
         </div>
         <div class="main-panel">
             <!-- Navbar -->
-            <SCRIPT  language=JavaScript> 
+            {{!-- <SCRIPT  language=JavaScript> 
                 function go(){
                     if (document.form.pass.value=="p" && document.form.user.value=="p"){ 
                         alert("Bienvenido Profesor"); 
@@ -79,7 +79,7 @@
                     else{ 
                         alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
                     } 
-                } 
+                }  --}}
             </SCRIPT>
             <!-- End Navbar -->
             
@@ -96,7 +96,7 @@
                                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
                                 <div class="login-form">
                                     <div class="sign-in-htm">
-                                        <form  name=form >
+                                        <form  id="log-in-form" >
                                                     <div class="group">
                                                         <label for="user" class="label">Carnet de Identidad</label>
                                                         <input  name="user" type="text" class="input">
@@ -110,7 +110,7 @@
                                                         <label for="check"><span class="icon"></span> Mantenerme registrado</label>
                                                     </div>
                                                     <div class="group">
-                                                        <input type="submit" class="button"  onclick=go() value="Ingresar">
+                                                        <input type="submit" class="button" value="Ingresar">
                                                     </div>
                                                     <div class="hr"></div>
                                                     <div class="foot-lnk">
@@ -131,6 +131,12 @@
             </div>
         </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/libs/jquery-3.3.1.min.js"></script> <!-- Script de jquery, Este debe estar antes -->
+    <script src="js/libs/moment.js"></script> 
+    <script src="js/libs/mustache.js"></script> 
+    <script src="js/libs/deparam.js"></script> 
+    <script src="js/sockets.js"></script><!-- Este debe estar despues -->
 </body>
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 </html>

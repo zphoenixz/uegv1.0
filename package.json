@@ -1,11 +1,11 @@
 {
   "name": "uegv1.0",
   "version": "1.0.0",
-  "description": "Sistema Acdemico",
+  "description": "Sistema Academico",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "test": "",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   "dependencies": {
     "express": "^4.16.3",
     "hbs": "^4.0.1",
-    "request": "^2.87.0"
+    "moment": "^2.22.2",
+    "request": "^2.87.0",
+    "socket.io": "^2.1.1"
   }
 }
