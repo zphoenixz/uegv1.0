@@ -16,13 +16,12 @@ var socketIO = require('socket.io');
                                 
 var server = http.createServer(app);
 var io = socketIO(server);
-//var io = require('socket.io').listen(server);
 app.use(express.static(publicPath));
-//app.set('View engine', 'hbs');//HTML mustache Handlebar
+app.set('View engine', 'hbs');//HTML mustache Handlebar
 //------------------------------------
 var op = 'nada';//nadie esta conectado
 var usernameN = 'sin_nombre';//nadie esta conectado
-
+var CerrarSesion = 'NoName';
 
 io.on('connection', (socket) => {
    
@@ -32,6 +31,7 @@ io.on('connection', (socket) => {
         }else{
             op = validarUsuario(params.user, params.pass);
             usernameN = params.user;
+            CerrarSesion = usernameN + " Cerrar Sesión";
             if(op == 'profesor'){
                 callback('Bienvenido Profesor!','p');
             }else if(op == 'secretario'){
@@ -41,261 +41,144 @@ io.on('connection', (socket) => {
             }
         }
     });
-    app.set('View engine', 'hbs');
-    app.get('/', (req, res) => {
-        res.render('dashboard_usuario.hbs', {
-            //VariableTitulo: 'Hagan bien!!!',
-            //VariableMsjBienvenida: '>:V',
-            //AnhoActual: new Date().getFullYear()
-        });
-    });
+    //app.set('View engine', 'hbs');
+    // app.get('/log_in', (req, res) => { //INICIAR SESIÓN
+    //     if(op == 'profesor')
+    //         res.render('dashboard_prof.hbs', {
     
-    app.get('/comunicados', (req, res) => {
-        res.render('comunicados.hbs', {
-            // VariableTitulo: 'About Page',
-            // //AnhoActual: new Date().getFullYear()
-        });
-    });
-    app.get('/entrevistas', (req, res) => {
-        res.render('entrevistas.hbs', {
+    //         });
+    //     else if(op == 'secretario')
+    //         res.render('dashboard_sec.hbs', {
     
-        });
-    });
-    app.get('/user', (req, res) => {
-        res.render('user.hbs', {
+    //         });
+    //     else if(op == 'nada')
+    //         res.render('inicio_sesion.hbs', {
     
-        });
-    });
-    app.get('/contactos', (req, res) => {
-        res.render('contactos.hbs', {
-    
-        });
-    });
-    app.get('/log_in', (req, res) => { //INICIAR SESIÓN
-        if(op == 'profesor'){
-            res.render('dashboard_prof.hbs', {
-                
-            });
-        }else if(op == 'secretario'){
-            res.render('dashboard_sec.hbs', {
-                
-            });
-            
-        }else if(op == 'nada')
-            res.render('inicio_sesion.hbs', {
-    
-            });
-    });
-    app.get('/log_in', (req, res) => { //INICIAR SESIÓN
-        if(op == 'profesor')
-            res.render('dashboard_prof.hbs', {
-    
-            });
-        else if(op == 'secretario')
-            res.render('dashboard_sec.hbs', {
-    
-            });
-        else if(op == 'nada')
-            res.render('inicio_sesion.hbs', {
-    
-            });
-    });
-    app.get('/notas', (req, res) => {
-        res.render('notas.hbs', {
-    
-        });
-    });
+    //         });
+    // });
+
     //------------------------------------------------MENU DEL PROFESOR
-    app.get('/dashboard_prof', (req, res) => {
-        var cerrarSesion = usernameN+" Cerrar Sesión"
-        res.render('dashboard_prof.hbs', {
-            logout: cerrarSesion
-        });
-    });
-    app.get('/comunicados_prof', (req, res) => {
-        res.render('comunicados_prof.hbs', {
-    
-        });
-    });
-    app.get('/listas_prof', (req, res) => {
-        res.render('listas_prof.hbs', {
-    
-        });
-    });
-    app.get('/horarios_prof', (req, res) => {
-        res.render('horarios_prof.hbs', {
-    
-        });
-    });
-    app.get('/entrevistas_prof', (req, res) => {
-        res.render('entrevistas_prof.hbs', {
-    
-        });
-    });
-    //------------------------------------------------MENU DEL SECRETARIO
-    //------------------------------------------------MENU DEL PROFESOR
-    app.get('/dashboard_sec', (req, res) => {
-        res.render('dashboard_sec.hbs', {
-    
-        });
-    });
-    app.get('/personal', (req, res) => {
-        res.render('personal.hbs', {
-    
-        });
-    });
-    app.get('/entrevistas_sec', (req, res) => {
-        res.render('entrevistas_sec.hbs', {
-    
-        });
-    });
-    app.get('/comunicados_sec', (req, res) => {
-        res.render('comunicados_sec.hbs', {
-    
-        });
-    });
-    app.get('/horarios_sec', (req, res) => {
-        res.render('horarios_sec.hbs', {
-    
-        });
-    });
-    app.get('/notas_sec', (req, res) => {
-        res.render('notas_sec.hbs', {
-    
-        });
-    });
-    app.get('/listas_sec', (req, res) => {
-        res.render('listas_sec.hbs', {
-    
-        });
-    });
-    //------------------------------------------------MENU DEL SECRETARIO
-    // app.get('/projects', (req, res) => {
-    //     res.render('projects.hbs', {
-    //         VariableTitulo: 'Proyectos',
+    // app.get('/dashboard_prof', (req, res) => {
+    //     var cerrarSesion = usernameN+" Cerrar Sesión"
+    //     res.render('dashboard_prof.hbs', {
+    //         logout: cerrarSesion
     //     });
     // });
-    
-    // app.get('/bad', (req, res) => {
-    //     res.send({//Mando un JSON de mensaje de error
-    //         errorMessage: 'Unable to handle request'
-    //     });
-    // });
-    //---------------------------------------------------------------------------------
+
 });
 
 
-// app.get('/', (req, res) => {
-//     res.render('dashboard_usuario.hbs', {
-//         //VariableTitulo: 'Hagan bien!!!',
-//         //VariableMsjBienvenida: '>:V',
-//         //AnhoActual: new Date().getFullYear()
-//     });
-// });
+app.get('/', (req, res) => {
+    res.render('dashboard_usuario.hbs', {
+        //VariableTitulo: 'Hagan bien!!!',
+        //VariableMsjBienvenida: '>:V',
+        //AnhoActual: new Date().getFullYear()
+    });
+});
 
-// app.get('/comunicados', (req, res) => {
-//     res.render('comunicados.hbs', {
-//         // VariableTitulo: 'About Page',
-//         // //AnhoActual: new Date().getFullYear()
-//     });
-// });
-// app.get('/entrevistas', (req, res) => {
-//     res.render('entrevistas.hbs', {
+app.get('/comunicados', (req, res) => {
+    res.render('comunicados.hbs', {
+        // VariableTitulo: 'About Page',
+        // //AnhoActual: new Date().getFullYear()
+    });
+});
+app.get('/entrevistas', (req, res) => {
+    res.render('entrevistas.hbs', {
 
-//     });
-// });
-// app.get('/user', (req, res) => {
-//     res.render('user.hbs', {
+    });
+});
+app.get('/user', (req, res) => {
+    res.render('user.hbs', {
 
-//     });
-// });
-// app.get('/contactos', (req, res) => {
-//     res.render('contactos.hbs', {
+    });
+});
+app.get('/contactos', (req, res) => {
+    res.render('contactos.hbs', {
 
-//     });
-// });
-// app.get('/log_in', (req, res) => { //INICIAR SESIÓN
-//     if(op == 'profesor')
-//         res.render('dashboard_prof.hbs', {
+    });
+});
+app.get('/log_in', (req, res) => { //INICIAR SESIÓN
+    if(op == 'profesor')
+        res.render('dashboard_prof.hbs', {
 
-//         });
-//     else if(op == 'secretario')
-//         res.render('dashboard_sec.hbs', {
+        });
+    else if(op == 'secretario')
+        res.render('dashboard_sec.hbs', {
 
-//         });
-//     else if(op == 'nada')
-//         res.render('inicio_sesion.hbs', {
+        });
+    else if(op == 'nada')
+        res.render('inicio_sesion.hbs', {
 
-//         });
-// });
-// app.get('/notas', (req, res) => {
-//     res.render('notas.hbs', {
+        });
+});
+app.get('/notas', (req, res) => {
+    res.render('notas.hbs', {
 
-//     });
-// });
-// //------------------------------------------------MENU DEL PROFESOR
-// app.get('/dashboard_prof', (req, res) => {
-//     res.render('dashboard_prof.hbs', {
+    });
+});
+//------------------------------------------------MENU DEL PROFESOR
+app.get('/dashboard_prof', (req, res) => {
+    res.render('dashboard_prof.hbs', {
+        logout: CerrarSesion
+    });
+});
+app.get('/comunicados_prof', (req, res) => {
+    res.render('comunicados_prof.hbs', {
 
-//     });
-// });
-// app.get('/comunicados_prof', (req, res) => {
-//     res.render('comunicados_prof.hbs', {
+    });
+});
+app.get('/listas_prof', (req, res) => {
+    res.render('listas_prof.hbs', {
 
-//     });
-// });
-// app.get('/listas_prof', (req, res) => {
-//     res.render('listas_prof.hbs', {
+    });
+});
+app.get('/horarios_prof', (req, res) => {
+    res.render('horarios_prof.hbs', {
 
-//     });
-// });
-// app.get('/horarios_prof', (req, res) => {
-//     res.render('horarios_prof.hbs', {
+    });
+});
+app.get('/entrevistas_prof', (req, res) => {
+    res.render('entrevistas_prof.hbs', {
 
-//     });
-// });
-// app.get('/entrevistas_prof', (req, res) => {
-//     res.render('entrevistas_prof.hbs', {
+    });
+});
+//------------------------------------------------MENU DEL SECRETARIO
+//------------------------------------------------MENU DEL PROFESOR
+app.get('/dashboard_sec', (req, res) => {
+    res.render('dashboard_sec.hbs', {
 
-//     });
-// });
-// //------------------------------------------------MENU DEL SECRETARIO
-// //------------------------------------------------MENU DEL PROFESOR
-// app.get('/dashboard_sec', (req, res) => {
-//     res.render('dashboard_sec.hbs', {
+    });
+});
+app.get('/personal', (req, res) => {
+    res.render('personal.hbs', {
 
-//     });
-// });
-// app.get('/personal', (req, res) => {
-//     res.render('personal.hbs', {
+    });
+});
+app.get('/entrevistas_sec', (req, res) => {
+    res.render('entrevistas_sec.hbs', {
 
-//     });
-// });
-// app.get('/entrevistas_sec', (req, res) => {
-//     res.render('entrevistas_sec.hbs', {
+    });
+});
+app.get('/comunicados_sec', (req, res) => {
+    res.render('comunicados_sec.hbs', {
 
-//     });
-// });
-// app.get('/comunicados_sec', (req, res) => {
-//     res.render('comunicados_sec.hbs', {
+    });
+});
+app.get('/horarios_sec', (req, res) => {
+    res.render('horarios_sec.hbs', {
 
-//     });
-// });
-// app.get('/horarios_sec', (req, res) => {
-//     res.render('horarios_sec.hbs', {
+    });
+});
+app.get('/notas_sec', (req, res) => {
+    res.render('notas_sec.hbs', {
 
-//     });
-// });
-// app.get('/notas_sec', (req, res) => {
-//     res.render('notas_sec.hbs', {
+    });
+});
+app.get('/listas_sec', (req, res) => {
+    res.render('listas_sec.hbs', {
 
-//     });
-// });
-// app.get('/listas_sec', (req, res) => {
-//     res.render('listas_sec.hbs', {
-
-//     });
-// });
+    });
+});
 //------------------------------------------------MENU DEL SECRETARIO
 // app.get('/projects', (req, res) => {
 //     res.render('projects.hbs', {
