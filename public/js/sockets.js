@@ -1,4 +1,5 @@
 var socket = io();
+//var socket2 = io2();
 
 socket.on('connect', function () {
 
@@ -7,6 +8,9 @@ socket.on('connect', function () {
 socket.on('disconnect', function () {
 
 });
+// socket.on('restringido', function (err) {
+//     alert(err);
+// });
 
 jQuery('#log-in-form').on('submit', function(e){
     e.preventDefault();

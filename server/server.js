@@ -13,11 +13,13 @@ var app = express();
 var http = require('http');
 var socketIO = require('socket.io');
 
-                                
 var server = http.createServer(app);
 var io = socketIO(server);
+//var io2 = socketIO(server);
 app.use(express.static(publicPath));
 app.set('View engine', 'hbs');//HTML mustache Handlebar
+
+
 //------------------------------------
 var op = 'nada';//nadie esta conectado
 var usernameN = 'sin_nombre';//nadie esta conectado
@@ -44,6 +46,7 @@ io.on('connection', (socket) => {
     socket.on('logout', (params, callback) => {
         op='nada';
         SesionActual = 'Iniciar Sesión';
+
         callback('Sesión Finalizada!');
     });
     //app.set('View engine', 'hbs');
@@ -74,35 +77,77 @@ io.on('connection', (socket) => {
 
 
 app.get('/', (req, res) => {
-    res.render('dashboard_usuario.hbs', {
-        logout: SesionActual
-        //VariableTitulo: 'Hagan bien!!!',
-        //VariableMsjBienvenida: '>:V',
-        //AnhoActual: new Date().getFullYear()
-    });
+    if(op == 'profesor')
+        res.render('dashboard_prof.hbs', {
+            logout: SesionActual
+        });
+    else if(op == 'secretario')
+        res.render('dashboard_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('dashboard_usuario.hbs', {
+            logout: SesionActual
+        });
 });
 
 app.get('/comunicados', (req, res) => {
-    res.render('comunicados.hbs', {
-        logout: SesionActual
-        // VariableTitulo: 'About Page',
-        // //AnhoActual: new Date().getFullYear()
-    });
+    if(op == 'profesor')
+        res.render('dashboard_prof.hbs', {
+            logout: SesionActual
+        });
+    else if(op == 'secretario')
+        res.render('dashboard_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('comunicados.hbs', {
+            logout: SesionActual
+            // VariableTitulo: 'About Page',
+            // //AnhoActual: new Date().getFullYear()
+        });
 });
 app.get('/entrevistas', (req, res) => {
-    res.render('entrevistas.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'profesor')
+        res.render('dashboard_prof.hbs', {
+            logout: SesionActual
+        });
+    else if(op == 'secretario')
+        res.render('dashboard_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('entrevistas.hbs', {
+            logout: SesionActual
+        });
 });
 app.get('/user', (req, res) => {
-    res.render('user.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'profesor')
+        res.render('dashboard_prof.hbs', {
+            logout: SesionActual
+        });
+    else if(op == 'secretario')
+        res.render('dashboard_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('user.hbs', {
+            logout: SesionActual
+        });
 });
 app.get('/contactos', (req, res) => {
-    res.render('contactos.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'profesor')
+        res.render('dashboard_prof.hbs', {
+            logout: SesionActual
+        });
+    else if(op == 'secretario')
+        res.render('dashboard_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('contactos.hbs', {
+            logout: SesionActual
+        });
 });
 app.get('/log_in', (req, res) => { //INICIAR SESIÓN
     if(op == 'profesor')
@@ -125,66 +170,126 @@ app.get('/notas', (req, res) => {
 });
 //------------------------------------------------MENU DEL PROFESOR
 app.get('/dashboard_prof', (req, res) => {
-    res.render('dashboard_prof.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'profesor')
+        res.render('dashboard_prof.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Profesor para acceder a esta pagina :('
+        });
 });
 app.get('/comunicados_prof', (req, res) => {
-    res.render('comunicados_prof.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'profesor')
+        res.render('comunicados_prof.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Profesor para acceder a esta pagina :('
+        });
 });
 app.get('/listas_prof', (req, res) => {
-    res.render('listas_prof.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'profesor')
+        res.render('listas_prof.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Profesor para acceder a esta pagina :('
+        });
 });
 app.get('/horarios_prof', (req, res) => {
-    res.render('horarios_prof.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'profesor')
+        res.render('horarios_prof.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Profesor para acceder a esta pagina :('
+        });
 });
 app.get('/entrevistas_prof', (req, res) => {
-    res.render('entrevistas_prof.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'profesor')
+        res.render('entrevistas_prof.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Profesor para acceder a esta pagina :('
+        });
 });
-//------------------------------------------------MENU DEL SECRETARIO
 //------------------------------------------------MENU DEL PROFESOR
+//------------------------------------------------MENU DEL SECRETARIO
 app.get('/dashboard_sec', (req, res) => {
-    res.render('dashboard_sec.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'secretario')
+        res.render('dashboard_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
+        });
 });
 app.get('/personal', (req, res) => {
-    res.render('personal.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'secretario')
+        res.render('personal.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
+        });
 });
 app.get('/entrevistas_sec', (req, res) => {
-    res.render('entrevistas_sec.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'secretario')
+        res.render('entrevistas_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
+        });
 });
 app.get('/comunicados_sec', (req, res) => {
-    res.render('comunicados_sec.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'secretario')
+        res.render('comunicados_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
+        });
 });
 app.get('/horarios_sec', (req, res) => {
-    res.render('horarios_sec.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'secretario')
+        res.render('horarios_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
+        });
 });
 app.get('/notas_sec', (req, res) => {
-    res.render('notas_sec.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'secretario')
+        res.render('notas_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
+        });
 });
 app.get('/listas_sec', (req, res) => {
-    res.render('listas_sec.hbs', {
-        logout: SesionActual
-    });
+    if(op == 'secretario')
+        res.render('listas_sec.hbs', {
+            logout: SesionActual
+        });
+    else
+        res.render('restringido.hbs', {
+            mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
+        });
 });
 //------------------------------------------------MENU DEL SECRETARIO
 // app.get('/projects', (req, res) => {
