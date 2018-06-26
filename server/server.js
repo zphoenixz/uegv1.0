@@ -21,7 +21,7 @@ app.set('View engine', 'hbs');//HTML mustache Handlebar
 //------------------------------------
 var op = 'nada';//nadie esta conectado
 var usernameN = 'sin_nombre';//nadie esta conectado
-var CerrarSesion = 'NoName';
+var SesionActual = 'Iniciar Sesión';
 
 io.on('connection', (socket) => {
    
@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
         }else{
             op = validarUsuario(params.user, params.pass);
             usernameN = params.user;
-            CerrarSesion = usernameN + " Cerrar Sesión";
+            SesionActual = usernameN + " Cerrar Sesión";
             if(op == 'profesor'){
                 callback('Bienvenido Profesor!','p');
             }else if(op == 'secretario'){
@@ -40,6 +40,11 @@ io.on('connection', (socket) => {
                 callback('C.I. o Contraseña incorrectos!');
             }
         }
+    });
+    socket.on('logout', (params, callback) => {
+        op='nada';
+        SesionActual = 'Iniciar Sesión';
+        callback('Sesión Finalizada!');
     });
     //app.set('View engine', 'hbs');
     // app.get('/log_in', (req, res) => { //INICIAR SESIÓN
@@ -70,6 +75,7 @@ io.on('connection', (socket) => {
 
 app.get('/', (req, res) => {
     res.render('dashboard_usuario.hbs', {
+        logout: SesionActual
         //VariableTitulo: 'Hagan bien!!!',
         //VariableMsjBienvenida: '>:V',
         //AnhoActual: new Date().getFullYear()
@@ -78,37 +84,38 @@ app.get('/', (req, res) => {
 
 app.get('/comunicados', (req, res) => {
     res.render('comunicados.hbs', {
+        logout: SesionActual
         // VariableTitulo: 'About Page',
         // //AnhoActual: new Date().getFullYear()
     });
 });
 app.get('/entrevistas', (req, res) => {
     res.render('entrevistas.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/user', (req, res) => {
     res.render('user.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/contactos', (req, res) => {
     res.render('contactos.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/log_in', (req, res) => { //INICIAR SESIÓN
     if(op == 'profesor')
         res.render('dashboard_prof.hbs', {
-
+            logout: SesionActual
         });
     else if(op == 'secretario')
         res.render('dashboard_sec.hbs', {
-
+            logout: SesionActual
         });
     else if(op == 'nada')
         res.render('inicio_sesion.hbs', {
-
+            logout: SesionActual
         });
 });
 app.get('/notas', (req, res) => {
@@ -119,64 +126,64 @@ app.get('/notas', (req, res) => {
 //------------------------------------------------MENU DEL PROFESOR
 app.get('/dashboard_prof', (req, res) => {
     res.render('dashboard_prof.hbs', {
-        logout: CerrarSesion
+        logout: SesionActual
     });
 });
 app.get('/comunicados_prof', (req, res) => {
     res.render('comunicados_prof.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/listas_prof', (req, res) => {
     res.render('listas_prof.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/horarios_prof', (req, res) => {
     res.render('horarios_prof.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/entrevistas_prof', (req, res) => {
     res.render('entrevistas_prof.hbs', {
-
+        logout: SesionActual
     });
 });
 //------------------------------------------------MENU DEL SECRETARIO
 //------------------------------------------------MENU DEL PROFESOR
 app.get('/dashboard_sec', (req, res) => {
     res.render('dashboard_sec.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/personal', (req, res) => {
     res.render('personal.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/entrevistas_sec', (req, res) => {
     res.render('entrevistas_sec.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/comunicados_sec', (req, res) => {
     res.render('comunicados_sec.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/horarios_sec', (req, res) => {
     res.render('horarios_sec.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/notas_sec', (req, res) => {
     res.render('notas_sec.hbs', {
-
+        logout: SesionActual
     });
 });
 app.get('/listas_sec', (req, res) => {
     res.render('listas_sec.hbs', {
-
+        logout: SesionActual
     });
 });
 //------------------------------------------------MENU DEL SECRETARIO

@@ -25,7 +25,19 @@ jQuery('#log-in-form').on('submit', function(e){
                 window.location.href = '/dashboard_sec';
         }
     });
+});
 
+jQuery('#log-out-form').on('click', function(e){
+    e.preventDefault();
+    console.log("entre al log out form");
+    socket.emit('logout', {
+
+    }, function (msj,tipo) {
+        if(msj){
+            alert(msj);
+            window.location.href = '/';
+        }
+    });
 });
 // socket.on('usuario', function(usernameN){
 //     var template = jQuery('#nombre').hbs();
