@@ -1,6 +1,5 @@
 var socket = io();
 
-
 socket.on('connect', function () {
 
 });
@@ -28,4 +27,10 @@ jQuery('#log-in-form').on('submit', function(e){
     });
 
 });
+// socket.on('usuario', function(usernameN){
+//     var template = jQuery('#nombre').hbs();
+//     var html = Mustache.render(template, {
+//         logout: usernameN
+//     });
+// });
 //socket.on('login', params, )

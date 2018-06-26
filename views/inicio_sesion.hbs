@@ -66,22 +66,6 @@
             </div>
         </div>
         <div class="main-panel">
-            <!-- Navbar -->
-            {{!-- <SCRIPT  language=JavaScript> 
-                function go(){
-                    if (document.form.pass.value=="p" && document.form.user.value=="p"){ 
-                        alert("Bienvenido Profesor"); 
-                        setTimeout(function(){document.location.href = "/dashboard_prof"},1);
-                    }else if (document.form.pass.value=="s" && document.form.user.value=="s"){ 
-                        alert("Bienvenido Administrativo"); 
-                        setTimeout(function(){document.location.href = "/dashboard_sec"},1);
-                    } 
-                    else{ 
-                        alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
-                    } 
-                }  --}}
-            </SCRIPT>
-            <!-- End Navbar -->
             
             <div class="content">
                 
@@ -132,11 +116,11 @@
         </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="js/libs/jquery-3.3.1.min.js"></script> <!-- Script de jquery, Este debe estar antes -->
+    <script src="js/libs/jquery-3.3.1.min.js"></script>
     <script src="js/libs/moment.js"></script> 
     <script src="js/libs/mustache.js"></script> 
     <script src="js/libs/deparam.js"></script> 
-    <script src="js/sockets.js"></script><!-- Este debe estar despues -->
+    <script src="js/sockets.js"></script>
 </body>
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 </html>
