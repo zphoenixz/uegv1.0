@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
@@ -86,11 +86,13 @@
                         <div class="navbar-toggle">
                             <button type="button" class="navbar-toggler">
                                 <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
                             </button>
                         </div>
                         <a class="navbar-brand" href="#pablo">Inscripción</a>
                     </div>
-                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">                    
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="/" id="log-out-form">
@@ -107,7 +109,8 @@
             <!-- End Navbar -->
             <div class="panel-header panel-header-sm">
             </div>
-				<div class="content">
+            {{!-- <form action = "/nuevo_estudiante" method="post"> --}}
+			<div class="content">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -116,312 +119,261 @@
                                 <h5 class="title">Datos del Estudiante</h5>
                             </div>
                             			
-							<form>
+							{{!-- <form> --}}
                                 <div class="input-group no-border">
                                     <input type="text" value="" class="form-control" placeholder="Buscar CI ...">
                                     <span class="input-group-addon">
                                         <i class="now-ui-icons ui-1_zoom-bold"></i>
                                     </span>
                                 </div>
-                            </form>
+                            {{!-- </form> --}}
+                            <!--action = "/nuevo_estudiante" method="post"--> 
+                            <form id="send_data1">
                             <div class="card-body">
-                                <form>
+                               
 							        <div class="row">
                                         <div class="col-md-5 pr-1">
                                             <div class="form-group">
+                                                <label for="exampleInputEmail1">Carnet de Identidad Padre</label>
+                                                <input type="number" class="form-control" placeholder="Carnet de Identidad" name="ecpp" required="required">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-5 pr-1"></div><!--Solo para hacer espacio-->
+                                        <div class="col-md-5 pr-1">
+                                            <div class="form-group">
                                                 <label>Apellido Paterno</label>
-                                                <input type="text" class="form-control" placeholder="Nombres">
+                                                <input type="text" class="form-control" placeholder="Apellido Paterno" name="eap" required="required" lang="es">
                                             </div>
                                         </div>
                                         <div class="col-md-5 px-1">
                                             <div class="form-group">
                                                 <label>Apellido Materno</label>
-                                                <input type="text" class="form-control" placeholder="Apellidos">
+                                                <input type="text" class="form-control" placeholder="Apellido Materno" name="eam" required="required">
                                             </div>
                                         </div>
 										<div class="col-md-10 pr-1">
                                             <div class="form-group">
                                                 <label>Nombres</label>
-                                                <input type="text" class="form-control" placeholder="Dirección de Domicilio">
+                                                <input type="text" class="form-control" placeholder="Nombre" name="en" required="required">
                                             </div>
                                         </div>
                                         <div class="col-md-3 pr-1">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Carnet de Identidad</label>
-                                                <input type="number" class="form-control" placeholder="Carnet de Identidad">
+                                                <input type="number" class="form-control" placeholder="Carnet de Identidad" name="eci" required="required">
                                             </div>
                                         </div>
 										<div class="col-md-2 px-1">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Ex</label>
-                                                <input type="text" class="form-control" >
+                                                <label for="exampleInputEmail1">Expedido</label>
+                                                 <select name="edep1" class="form-control" >
+                                                    <option value="La Paz">La Paz</option>
+                                                    <option value="Oruro">Oruro</option>
+                                                    <option value="Potosi">Potosi</option>
+                                                    <option value="Cbba">Cbba</option>
+                                                    <option value="Sucre">Sucre</option>
+                                                    <option value="Tarija">Tarija</option>
+                                                    <option value="Pando">Pando</option>
+                                                    <option value="Beni">Beni</option>
+                                                    <option value="Santa Cruz">Santa Cruz</option>
+                                                </select>
                                             </div>
                                         </div>
 										<div class="col-md-3 pl-1">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Fecha de Nacimiento</label>
-                                                <input type="date" class="form-control" placeholder="Fecha de Nacimiento">
+                                                <input type="date" class="form-control" placeholder="Fecha de Nacimiento" name="efn" required="required">
                                         </div>
                                         </div>
 										<div class="col-md-3 px-1">
                                             <div class="form-group">
                                                 <label>Sexo</label>
-                                                <input type="text" class="form-control" placeholder="Sexo">
+                                                <select name="esex" class="form-control" >
+                                                    <option value="Masculino">Masculino</option>
+                                                    <option value="Femenino">Femenino</option>
+                                                </select>
                                             </div>
                                            
                                         </div>
 									</div>
-									<div class="row">
-										<div class="col-md-10 pr-1">
-                                            <div class="form-group">
-                                                <label>CERTIFICADO DE NACIMIENTO</label>
-                                            </div>
-                                        </div>
-										<div class="col-md-3 pr-1">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Oficialia Nro</label>
-                                                <input type="number" class="form-control" placeholder="Oficialia Nro">
-                                            </div>
-                                        </div>
-										<div class="col-md-3 px-1">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Libro Nro</label>
-                                                <input type="number" class="form-control" placeholder="Libro Nro">
-                                            </div>
-                                        </div>
-										<div class="col-md-3 pl-1">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Partida Nro</label>
-                                                <input type="number" class="form-control" placeholder="Partida Nro">
-                                        </div>
-                                        </div>
-										<div class="col-md-2 px-1">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Folio Nro</label>
-                                                <input type="number" class="form-control" placeholder="Folio Nro">
-                                            </div>
-                                           
-                                        </div>
-										<div class="col-md-10 pr-1">
-                                            <div class="form-group">
-                                                <label>Codigo Estudiantil Rude</label>
-                                                <input type="number" class="form-control" placeholder="Codigo Estudiantil Rude">
-                                            </div>
-                                        </div>
-                                    </div>
-									
+								
 									<div class="row">
 										<div class="col-md-10 pr-1">
                                             <div class="form-group">
                                                 <label>LUGAR DE NACIMIENTO</label>
                                             </div>
                                         </div>
-										<div class="col-md-10 pr-1">
+                                         <div class="col-md-5 pr-1">
                                             <div class="form-group">
                                                 <label>País</label>
-                                                <input type="text" class="form-control" placeholder="País">
+                                                <input type="text" class="form-control" placeholder="País" name="ep" required="required">
                                             </div>
                                         </div>
-										<div class="col-md-10 pr-1">
+                                        <div class="col-md-5 px-1">
                                             <div class="form-group">
                                                 <label>Departamento</label>
-                                                <input type="text" class="form-control" placeholder="Departamento">
-                                            </div>
-                                        </div>
-										<div class="col-md-10 pr-1">
-                                            <div class="form-group">
-                                                <label>Provincia</label>
-                                                <input type="text" class="form-control" placeholder="Provincia">
-                                            </div>
-                                        </div>
-										<div class="col-md-10 pr-1">
-                                            <div class="form-group">
-                                                <label>Localidad</label>
-                                                <input type="text" class="form-control" placeholder="Localidad">
+        
+                                                <select name="edep2" class="form-control" >
+                                                    <option value="La Paz">La Paz</option>
+                                                    <option value="Oruro">Oruro</option>
+                                                    <option value="Potosi">Potosi</option>
+                                                    <option value="Cbba">Cbba</option>
+                                                    <option value="Sucre">Sucre</option>
+                                                    <option value="Tarija">Tarija</option>
+                                                    <option value="Pando">Pando</option>
+                                                    <option value="Beni">Beni</option>
+                                                    <option value="Santa Cruz">Santa Cruz</option>
+                                                </select>
                                             </div>
                                         </div>
 										<div class="col-md-5 pr-1">
                                             <div class="form-group">
-                                                <label>Dirección de Domicilio</label>
-												<input type="text" class="form-control" placeholder="Zona, Avenida/Calle ">
+                                                <label>Provincia</label>
+                                                <input type="text" class="form-control" placeholder="Provincia" name="eprov" required="required">
                                             </div>
                                         </div>
 										<div class="col-md-5 px-1">
                                             <div class="form-group">
-                                                <label>Telefono de Referencia</label>
-												<input type="text" class="form-control" placeholder="Telefono de Referencia">
+                                                <label>Localidad</label>
+                                                <input type="text" class="form-control" placeholder="Localidad" name="eloc" required="required">
                                             </div>
                                         </div>
+										
 										<div class="col-md-3 pr-1">
 											<label>Curso</label>
-											<select id="curso" class="form-control">
-											<option value="01" >1º</option>
-											<option value="02" >2º</option>
-											<option value="03" >3º</option>
-											<option value="04" >4º</option>
-											<option value="05" >5º</option>
-											<option value="06" >6º</option>	</select>										
+											<select id="curso" class="form-control" name="ecur">
+                                                <option value="1ero" >1º Secundaria</option>
+                                                <option value="2do" >2º Secundaria</option>
+                                                <option value="3ero" >3º Secundaria</option>
+                                                <option value="4to" >4º Secundaria</option>
+                                                <option value="5to" >5º Secundaria</option>
+                                                <option value="6to" >6º Secundaria</option>	
+                                            </select>										
 										</div>
 										
 										<div class="col-md-3 pr-1">
 											<label>Paralelo</label>
-											<select id="paralelo" class="form-control">
-											<option value="01" >A</option>
-											<option value="02" >B</option>
-											<option value="03" >C</option></select>										
+											<select id="paralelo" class="form-control" name="epar">
+                                                <option value="Par_A" >A</option>
+                                                <option value="Par_B" >B</option>
+                                                <option value="Par_C" >C</option>
+                                            </select>										
 										</div>		
 									
 										
                                     </div>
-                                    <center>
-                                            <input class="btn btn-primary" type="submit" value="Eliminar">
-                                            <input class="btn btn-primary" type="submit" value="Guardar">
+                                    <center>	    
+                                        <input class="btn btn-primary" type="submit" value="Guardar" id="guardar_est" >
 								    </center>
-                                </form>
+                                
                             </div>
-							
+							</form>
                         </div>
                     </div>
 
                 </div>
             </div>
 							
-	
-	
-	
 
-		<div class="content">
+		    <div class="content">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
 					
                             <div class="card-header">
-                                <h5 class="title"> Datos del Padre O Tutor</h5>
+                                <h5 class="title"> Datos del Tutor</h5>
                             </div>					
 							
+                            <form id="send_data2">
                             <div class="card-body">
-                                <form>
+                              
 							        <div class="row">	
                                         <div class="col-md-5 pr-1">
                                             <div class="form-group">
                                                 <label>Apellido Paterno</label>
-                                                <input type="text" class="form-control" placeholder="Apellido Paterno">
+                                                <input type="text" class="form-control" placeholder="Apellido Paterno" name="pap" required="required">
                                             </div>
                                         </div>
                                         <div class="col-md-5 px-1">
                                             <div class="form-group">
                                                 <label>Apellido Materno</label>
-                                                <input type="text" class="form-control" placeholder="Apellido Materno">
+                                                <input type="text" class="form-control" placeholder="Apellido Materno" name="pam" required="required">
                                             </div>
                                         </div>
 										<div class="col-md-5 pr-1">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Nombres</label>
-                                                <input type="text" class="form-control" placeholder="Nombres">
+                                                <input type="text" class="form-control" placeholder="Nombres" name="pn" required="required">
                                             </div>
                                         </div>
 										<div class="col-md-3 px-1">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Carnet de Identidad</label>
-                                                <input type="number" class="form-control" placeholder="Carnet de Identidad">
+                                                <input type="number" class="form-control" placeholder="Carnet de Identidad" name="pci" required="required">
                                             </div>
                                         </div>
 										<div class="col-md-2 pl-1">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Ex</label>
-                                                <input type="text" class="form-control">
+                                                <label for="exampleInputEmail1">Expedido</label>
+                                                <select name="pdep1" class="form-control" >
+                                                    <option value="La Paz">La Paz</option>
+                                                    <option value="Oruro">Oruro</option>
+                                                    <option value="Potosi">Potosi</option>
+                                                    <option value="Cbba">Cbba</option>
+                                                    <option value="Sucre">Sucre</option>
+                                                    <option value="Tarija">Tarija</option>
+                                                    <option value="Pando">Pando</option>
+                                                    <option value="Beni">Beni</option>
+                                                    <option value="Santa Cruz">Santa Cruz</option>
+                                                </select>
                                         </div>
                                         </div>
-                                        <div class="col-md-10 pr-1">
-                                            <div class="form-group">
-                                                <label>Ocupación laboral actual</label>
-                                                <input type="text" class="form-control" placeholder="Ocupación laboral actual">
-                                            </div>
-                                        </div>
-										<div class="col-md-10 pr-1">
-                                            <div class="form-group">
-                                                <label>Mayor grado de instrucción alcanzado</label>
-                                                <input type="text" class="form-control" placeholder="Mayor grado de instrucción alcanzado">
-                                            </div>
-                                        </div>
-										<div class="col-md-10 pr-1">
-                                            <div class="form-group">
-                                                <label>En caso de tutor(a) ¿Cuál es el parentesco?</label>
-                                                <input type="text" class="form-control" placeholder="En caso de tutor(a) ¿Cuál es el parentesco?">
-                                            </div>
-                                        </div>
-									
-									</div>
-									<center>		
-                                            <input class="btn btn-primary" type="submit" value="Eliminar">
-                                            <input class="btn btn-primary" type="submit" value="Guardar">
-								</center>
-								</form>
-							</div>
-	
-						<div class="card-header">
-                                <h5 class="title"> Datos de la Madre</h5>
-                            </div>					
-						                            <div class="card-body">
-                                <form action="../usuario/inscripcion.html">
-							        <div class="row">	
                                         <div class="col-md-5 pr-1">
                                             <div class="form-group">
-                                                <label>Apellido Paterno</label>
-                                                <input type="text" class="form-control" placeholder="Apellido Paterno">
+                                                <label>Dirección de Domicilio</label>
+												<input type="text" class="form-control" placeholder="Zona, Avenida/Calle" name="pdir" required="required">
                                             </div>
                                         </div>
-                                        <div class="col-md-5 px-1">
+										<div class="col-md-5 px-1">
                                             <div class="form-group">
-                                                <label>Apellido Materno</label>
-                                                <input type="text" class="form-control" placeholder="Apellido Materno">
+                                                <label>Telefono de Referencia</label>
+												<input type="number" class="form-control" placeholder="Telefono de Referencia"name="ptel" required="required">
                                             </div>
-                                        </div>
-										<div class="col-md-5 pr-1">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Nombres</label>
-                                                <input type="text" class="form-control" placeholder="Nombres">
-                                            </div>
-                                        </div>
-										<div class="col-md-3 px-1">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Carnet de Identidad</label>
-                                                <input type="number" class="form-control" placeholder="Carnet de Identidad">
-                                            </div>
-                                        </div>
-										<div class="col-md-2 pl-1">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Ex</label>
-                                                <input type="text" class="form-control">
-                                        </div>
                                         </div>
                                         <div class="col-md-10 pr-1">
                                             <div class="form-group">
                                                 <label>Ocupación laboral actual</label>
-                                                <input type="text" class="form-control" placeholder="Ocupación laboral actual">
+                                                <input type="text" class="form-control" placeholder="Ocupación laboral actual" name="pocu" required="required">
                                             </div>
                                         </div>
 										<div class="col-md-10 pr-1">
                                             <div class="form-group">
                                                 <label>Mayor grado de instrucción alcanzado</label>
-                                                <input type="text" class="form-control" placeholder="Mayor grado de instrucción alcanzado">
+                                                <input type="text" class="form-control" placeholder="Mayor grado de instrucción alcanzado" name="pgrado" required="required">
                                             </div>
                                         </div>
 										<div class="col-md-10 pr-1">
                                             <div class="form-group">
-                                                <label>En caso de tutor(a) ¿Cuál es el parentesco?</label>
-                                                <input type="text" class="form-control" placeholder="En caso de tutor(a) ¿Cuál es el parentesco?">
+                                                <label>¿Cuál es el parentesco?</label>
+                                                <select name="ppar" class="form-control" >
+                                                    <option value="Padre">Padre</option>
+                                                    <option value="Madre">Madre</option>
+                                                    <option value="Tio/a">Tio/a</option>
+                                                    <option value="Abuelo/a">Abuelo/a</option>
+                                                    <option value="Hmno/a">Hmmo/a</option>
+                                                    <option value="Otro">Otro</option>
+                                                </select>
                                             </div>
                                         </div>
 									
 									</div>
-								<center>		
-                                        <input class="btn btn-primary" type="submit" value="Eliminar">
-                                        <input class="btn btn-primary" type="submit" value="Guardar">
-								</center>
+									<center>		    
+                                        <input class="btn btn-primary" type="submit" value="Guardar" id="guardar_dad" >
+								    </center>
 								
-								</form>
-							</div>		
+							</div>       
+                            </form>	
 						</div>
 					</div>
 				</div>
@@ -436,25 +388,8 @@
     <script src="js/sockets.js"></script>
 </body>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.min.js"></script>
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!-- Chart JS -->
-<script src="../assets/js/plugins/chartjs.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../assets/js/now-ui-dashboard.js?v=1.0.1"></script>
-<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/demo/demo.js"></script>
-<script>
-    $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
-    });
-</script>
+<script src="js/libs/extras/jquery.min.js"></script>
+<script src="js/libs/extras/now-ui-dashboard.js?v=1.0.1"></script>
+
 
 </html>

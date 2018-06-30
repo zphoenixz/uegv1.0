@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
@@ -34,31 +34,31 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="active">
-                        <a href="/dashboard_prof">
+                        <a href="/dashboard_prof" id="nave-in-pag">
                             <i class="now-ui-icons business_badge"></i>
                             <p>Notas</p>
                         </a>
                     </li>
                     <li>
-                        <a href="/comunicados_prof">
+                        <a href="/comunicados_prof" id="nave-in-pag">
                             <i class="now-ui-icons ui-1_bell-53"></i>
                             <p>Comunicados</p>
                         </a>
                     </li>
 					<li>
-                        <a href="/listas_prof">
+                        <a href="/listas_prof" id="nave-in-pag">
                             <i class="now-ui-icons files_paper"></i>
                             <p>Listas</p>
                         </a>
                     </li>
 					<li>
-                        <a href="/horarios_prof">
+                        <a href="/horarios_prof" id="nave-in-pag">
                             <i class="now-ui-icons ui-1_calendar-60"></i>
                             <p>Horarios</p>
                         </a>
                     </li>
                     <li>
-                        <a href="/entrevistas_prof">
+                        <a href="/entrevistas_prof" id="nave-in-pag">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             <p>Entrevistas</p>
                         </a>
@@ -82,6 +82,7 @@
                     </div>
                      <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="navbar-nav">
+
                             <li class="nav-item">
                                 <a class="nav-link" href="/" id="log-out-form">
                                     <i class="now-ui-icons users_single-02"></i>
@@ -253,6 +254,10 @@
     <script src="js/libs/mustache.js"></script> 
     <script src="js/libs/deparam.js"></script> 
     <script src="js/sockets.js"></script>
+    <!--   para la barra lateral    -->
+    <script src="js/libs/extras/jquery.min.js"></script>
+    <script src="js/libs/extras/now-ui-dashboard.js?v=1.0.1"></script>
+
 </body>
 
 

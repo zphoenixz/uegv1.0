@@ -18,9 +18,13 @@
   },
   "homepage": "https://github.com/zphoenixz/uegv1.0#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "firebase": "^5.1.0",
+    "firebase-admin": "^5.12.1",
     "hbs": "^4.0.1",
     "moment": "^2.22.2",
+    "popups": "^1.1.3",
     "request": "^2.87.0",
     "socket.io": "^2.1.1"
   }
