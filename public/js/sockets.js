@@ -8,6 +8,134 @@ socket.on('connect', function () {
 socket.on('disconnect', function () {
 
 });
+//============================================================================================== ENTREVISTAS
+function myFunction() {
+
+    socket.emit('load_plist', {
+
+    }, function (msj,tipo) {
+        var list = jQuery('#lista_profesor');
+        if(tipo == "lista"){
+            var todosLosDatos = (Object.values(msj)).sort();
+            var tipo;
+            
+            todosLosDatos.forEach(function(element) {
+                var nombre = element.nombre;
+                var apellidos = element.apellidos;
+                var cargo = element.cargo;
+                if( cargo == "Profesor"){
+                    list.append(`<option value="${nombre+" "+apellidos}">${nombre+" "+apellidos}</option>`);
+                }
+            });
+
+        }else{
+            alert("No existe profesores registrados");
+        }
+    });
+}
+
+function myFunction2() {
+
+    socket.emit('load_elist', {
+
+    }, function (msj,tipo) {
+        var list = jQuery('#lista_entrevistas');
+        if(tipo == "lista"){
+            var todosLosDatos = (Object.values(msj)).sort();
+            var tipo;
+            console.log("------------------------------------");
+            console.log("los datos son----- ", todosLosDatos[0].materia);
+            todosLosDatos.forEach(function(element) {
+                var nom = element.profesor;
+                var mat = element.materia;
+                var fech = element.fecha;
+                var hor = element.hor;
+                list.append(`<tr><td>${nom}</td><td>${mat}</td><td>${fech}</td><td class="text-right">${hor}</td></tr>`);
+            });
+
+        }else{
+            alert("No existe entrevistas registrados");
+        }
+    });
+}
+function myFunction3() {
+    
+        socket.emit('load_clist', {
+    
+        }, function (msj,tipo) {
+            var list1 = jQuery('#lista_noticias');
+            var list2 = jQuery('#lista_actividades');
+
+            if(tipo == "lista"){
+                var todosLosDatos = (Object.values(msj)).sort();
+                var tipo;
+                console.log("------------------------------------");
+                todosLosDatos.forEach(function(element) {
+                    var tit = element.ctitulo;
+                    var fech = element.cfecha;
+                    var tip = element.ctipo;
+                    var text = element.ctexto;
+                    if(tip=="noticia"){
+                        list1.append(`<div class=" alert-primary alert-with-icon" data-notify="container"><span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span><h3>${tit}</h3><p><b>${fech}</b>${": "+text} </p></div>`);
+                    }else{
+                        list2.append(`<div class=" alert-primary alert-with-icon" data-notify="container"><span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span><h3>${tit}</h3><p><b>${fech}</b>${": "+text} </p></div>`);
+                    }
+                });
+    
+            }else{
+                alert("No existe comunicados registrados");
+            }
+        });
+    }
+//-------------------------------------------------- ENVIAR DATOS ENTREVISTA
+jQuery('#send_ent').on('submit', function(e){
+    e.preventDefault();
+    var BotonGuardar = jQuery('#guardar_per');
+    BotonGuardar.attr('disabled', 'disabled').prop('value', 'Guardando....'); 
+
+    var prof = jQuery('[name=eprof]');
+    var mate = jQuery('[name=epmat]');
+    var fech = jQuery('[name=epf]');
+    var hor = jQuery('[name=eph]');
+
+    socket.emit('save_ent', {
+        prof: prof.val(),
+        mate: mate.val(),
+        fech: fech.val(),
+        hor: hor.val()
+    }, function (msj,tipo) {
+        if(msj){
+            alert(msj);
+            window.location.href = '/entrevistas_sec';
+        }
+    });
+});
+//============================================================================================== ENTREVISTAS
+//-------------------------------------------------- ENVIAR DATOS COMUNICADOS
+jQuery('#send_com').on('submit', function(e){
+    e.preventDefault();
+    var BotonGuardar = jQuery('#guardar_com');
+    BotonGuardar.attr('disabled', 'disabled').prop('value', 'Registrando....'); 
+
+    var ctipo = jQuery('[name=ctipo]');
+    var cfecha = jQuery('[name=cfecha]');
+    var ctexto = jQuery('[name=ctexto]');
+    var ctitulo = jQuery('[name=ctitulo]');
+    
+
+    socket.emit('save_com', {
+        ctipo: ctipo.val(),
+        cfecha: cfecha.val(),
+        ctexto: ctexto.val(),
+        ctitulo: ctitulo.val()
+    }, function (msj,tipo) {
+        if(msj){
+            alert(msj);
+            window.location.href = '/comunicados_sec';
+        }
+    });
+});
+
 //============================================================================================== LISTAS CURSOS
 jQuery('#get_list').on('submit', function(e){
     e.preventDefault();

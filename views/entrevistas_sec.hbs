@@ -16,7 +16,7 @@
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
 </head>
 
-<body class="">
+<body onload="myFunction()">
     <div class="wrapper ">
         <div class="sidebar" data-color="orange">
             <!--
@@ -118,41 +118,55 @@
                                 <h4 class="card-title">Registrar Entrevistas</h4>
                             </div>
                             <div class="card-body">
-                                    <form>
-                                            <div class="input-group no-border">
-                                                <input type="text" value="" class="form-control" placeholder="Buscar Profesor ...">
-                                                <span class="input-group-addon">
-                                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                                </span>
-                                            </div>
-                                        </form>   
-
+                               
+                         <form id="send_ent">
 						<div class="table-full-width table-responsive">
-                          <table class="table">
-						  <thead class=" text-primary">
-							  <th>PROFESOR</th>
-							  <th>MATERIA</th>
-							  <th>DÍA</th>
-							  <th>HORARIO</th>
-                            <tbody>
-                                                                                    
+                            <table class="table">
+                            <thead class=" text-primary">
+                                <th>PROFESOR</th>
+                                <th>MATERIA</th>
+                                <th>DÍA</th>
+                                <th>HORARIO</th>
+                            </thead>
+                           
+                            <tbody>                                                
                                 <tr>
-                                    <td>  <select id="profesor" class="form-control" style="width: 450px">
-                                            <option value="01" > </option>                            
-                                            </select></td>
-                                    
-								<td><input type="text" class="form-control" style="width:150px" ></td>
-								<td> <input type="date" class="form-control" style="width:150px" ></td>
-								<td> <input type="time" class="form-control" style="width:150px" ></td>
+                                    <td>  
+                                        <select name= "eprof" id="lista_profesor" class="form-control" style="width: 300px"required="required">
+                                             <option value="">Seleccione un profesor</option>                        
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name= "epmat" id="materia" class="form-control"required="required"style="width:200px">
+                                            <option value="">Seleccione una Materia</option>
+                                            <option value="Matematicas">Matematicas</option>
+                                            <option value="Fisica">Física</option>
+                                            <option value="Biologia">Biología</option>
+                                            <option value="Geografia">Geografía</option>
+                                            <option value="Literatura">Literatura</option>
+                                            <option value="Artes_Plasticas">Artes Plasticas</option>
+                                            <option value="Musica">Música</option>
+                                            <option value="Educ_Fisica">Educ. Física</option>
+                                            <option value="Quimica">Quimica</option>
+                                            <option value="Filosofia">Filosofia</option>
+                                            <option value="Civica">Civica</option>
+                                            <option value="Psicologia">Psicologia</option>
+                                            <option value="Ingles">Ingles</option>
+                                        </select>	
+
+                                    </td>
+                                    <td> <input name= "epf"   type="date" class="form-control" style="width:150px" required="required"></td>
+                                    <td> <input name= "eph" type="time" class="form-control" style="width:150px" required="required"></td>
                                 </tr>
                             </tbody>
+                          
                           </table>
                           
                           <center>		
-                                <input class="btn btn-primary" type="submit" value="Registrar">
-                                <input class="btn btn-primary" type="submit" value="Eliminar">
-								</center>
+                                <input class="btn btn-primary" type="submit" value="Registrar"id="guardar_ent">
+							</center>
                         </div>
+                          </form>
 								</div>
                             <div class="card-footer">
                                 <div class="stats">

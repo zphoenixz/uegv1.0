@@ -116,21 +116,21 @@
                                 <h4 class="card-title">Registrar Comunicados</h4>
                             </div>
                             <div class="card-body">
-                                    <form>
-                                            <div class="input-group no-border">
-                                                <input type="text" value="" class="form-control" placeholder="Buscar Evento ...">
-                                                <span class="input-group-addon">
-                                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                                </span>
-                                            </div>
-                                        </form>
-
+                          
+                         <form id="send_com">
 						<div class="table-full-width table-responsive">
                                 <div class="row">
 										<div class="col-md-3 pr-1">
 											<label>Tipo</label>
-											<select name= "Tipo" id="Tipo" class="form-control"  onchange="cargarMaterias();">
-											<option value="" >Seleccione un Tipo</option></select>										
+											<select id="Tipo" class="form-control" name= "ctipo" required="required">
+											    <option value="" >Seleccione un Tipo</option>
+                                                <option value="noticia" >Noticia</option>
+                                                <option value="actividad" >Actividad</option>
+                                            </select>									
+                                        </div>
+                                        <div class="col-md-3 pr-1">
+											<label>Titulo</label>
+                                            <input type="text" class="form-control" name= "ctitulo" required="required">
                                         </div>
                                     </div>
                           <table class="table">
@@ -140,18 +140,18 @@
                             </thead>
                             <tbody>
                                 <tr>
-								<td> <input type="date" class="form-control" style="width:150px" ></td>
-								<td> <textarea  ROWS="5" COLS="80" ></textarea></td>
+								    <td> <input type="date" class="form-control" style="width:150px" name= "cfecha" required="required"></td>
+								    <td> <textarea  ROWS="5" COLS="80" name= "ctexto" required="required"></textarea></td>
                                 </tr>
 								
 
                             </tbody>   
                           </table>
                           <center>		
-                                <input class="btn btn-primary" type="submit" value="Registrar">
-                                <input class="btn btn-primary" type="submit" value="Eliminar">
-								</center>
+                                <input class="btn btn-primary" type="submit" value="Registrar"id="guardar_com">
+							</center>
                         </div>
+                        </form>
 								</div>
                             <div class="card-footer">
                                 <div class="stats">

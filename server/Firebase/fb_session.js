@@ -69,6 +69,16 @@ var pushData = (dirname, key, data, callback) => {
     });
     callback();
 };
+//-------------------------------------------------------------------------PUSHDATA_Real
+var pushData_Real = ( key, data, callback) => {
+    var db = admin.database();
+    var ref_1 = db.ref();
+    var ref_2 = ref_1.child(key);
+    ref_2.once("value", function(snapshot) {
+        ref_2.push(data);
+    });
+    callback();
+};
 //-------------------------------------------------------------------------UPDATEDATA
 var updateData = (dirname, key, data, callback) => {
     var db = admin.database();
@@ -140,6 +150,7 @@ module.exports.existsData = existsData;
 module.exports.deleteData = deleteData;
 module.exports.deleteMateria = deleteMateria;
 module.exports.existsPersonalData = existsPersonalData;
+module.exports.pushData_Real = pushData_Real;
 //.................................................................................
 
 //ejm 1-------------------------------------------------------------------

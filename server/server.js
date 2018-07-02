@@ -28,8 +28,8 @@ app.set('View engine', 'hbs');//HTML mustache Handlebar
 var op = 'nada';//nadie esta conectado
 var usernameN = 'sin_nombre';//nadie esta conectado
 var SesionActual = 'Iniciar Sesión';
-var newStudent, newDad, newPer ;
-var e_ci, p_ci, per_ci;
+var newStudent, newDad, newPer, newEnt ;
+var e_ci, p_ci, per_ci, newCom;
 
 io.on('connection', (socket) => {
       //----------------------------------------------------------------------------------LOGON
@@ -70,12 +70,42 @@ io.on('connection', (socket) => {
         
         callback('Sesión Finalizada!');
     });
-    //----------------------------------------------------------------------------------LOAD LIST
+    //----------------------------------------------------------------------------------LOAD LIST CRUSO
     socket.on('load_list', (params, callback) => {
         var curso = params.curso;
         var paralelo = params.paralelo
 
         FBQueries.existsData("Cursos/"+curso, paralelo, results1 => {
+            if(results1 == "0"){
+                callback('nada','nada');
+            }else{ 
+                callback(results1,'lista');
+            }
+        });
+    });
+        //----------------------------------------------------------------------------------LOAD LIST PROFESORES
+        socket.on('load_plist', (params, callback) => {
+            FBQueries.existsPersonalData("Personal", results1 => {
+                if(results1 == "0"){
+                    callback('nada','nada');
+                }else{ 
+                    callback(results1,'lista');
+                }
+            });
+        });
+    //----------------------------------------------------------------------------------LOAD LIST ENTREVISTAS
+    socket.on('load_elist', (params, callback) => {
+        FBQueries.existsPersonalData("Entrevistas", results1 => {
+            if(results1 == "0"){
+                callback('nada','nada');
+            }else{ 
+                callback(results1,'lista');
+            }
+        });
+    });
+       //----------------------------------------------------------------------------------LOAD LIST COMUNICADOS
+       socket.on('load_clist', (params, callback) => {
+        FBQueries.existsPersonalData("Comunicados", results1 => {
             if(results1 == "0"){
                 callback('nada','nada');
             }else{ 
@@ -290,7 +320,36 @@ io.on('connection', (socket) => {
                 }
             });
         });
+    //------------------------------------------------------------------------------------ GUARDAR ENTREVISTA
+    socket.on('save_ent', (params, callback) => {
+        newEnt = { //Clase Apoderado--------------------------------------------
+            profesor: params.prof,
+            materia: params.mate,
+            fecha: params.fech,
+            hor: params.hor
+        };
+        //----
+        FBQueries.pushData_Real("Entrevistas", newEnt, resultados => {
+            console.log("Se guardo Entrevista");
+        });
+        callback("Se guardo entrevista");
+    });
+    //------------------------------------------------------------------------------------ GUARDAR COMUNICADO
+    socket.on('save_com', (params, callback) => {
+        newCom = { //Clase Comunicado--------------------------------------------
+            ctipo: params.ctipo,
+            cfecha: params.cfecha,
+            ctexto: params.ctexto,
+            ctitulo: params.ctitulo
+        };
+        //----
+        FBQueries.pushData_Real("Comunicados", newCom, resultados => {
+            console.log("Se guardo Comunicados");
+        });
+        callback("Se guardo comunicados");
+    });
 });
+
 
 //------------------------------------------------------------------------------
 //---------------------------------------------------------ROUTERS ENTRE PAGINAS
