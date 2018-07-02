@@ -6,13 +6,11 @@ const publicPath = path.join(__dirname,'../public');
 
 const {isRealString} = require('./utils/validation');
 const {validarUsuario} = require('./utils/validarUser');
-const pushData = require('./Firebase/fb_session.js');
-const exists = require('./Firebase/fb_session.js');
-const updateData = require('./Firebase/fb_session.js');
-const getData = require('./Firebase/fb_session.js');
+const FBQueries = require('./Firebase/fb_session.js');
 
 const port = process.env.PORT || 3000;
 //-----------------------------------N
+
 var app = express();
 var http = require('http');
 var socketIO = require('socket.io');
@@ -25,67 +23,170 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.static(publicPath));
 app.set('View engine', 'hbs');//HTML mustache Handlebar
+
 //------------------------------------
 var op = 'nada';//nadie esta conectado
 var usernameN = 'sin_nombre';//nadie esta conectado
 var SesionActual = 'Iniciar Sesión';
-var newStudent, newDad ;
-var e_ci, p_ci;
+var newStudent, newDad, newPer ;
+var e_ci, p_ci, per_ci;
 
 io.on('connection', (socket) => {
+      //----------------------------------------------------------------------------------LOGON
     socket.on('login', (params, callback) => {
         if(!isRealString(params.user) || !isRealString(params.pass)){
             callback('C.I. y Contraseña son requeridos!');
         }else{
-            op = validarUsuario(params.user, params.pass);
-            usernameN = params.user;
-            SesionActual = usernameN + " Cerrar Sesión";
-            if(op == 'profesor'){
-                callback('Bienvenido Profesor!','p');
-            }else if(op == 'secretario'){
-                callback('Bienvenido Administrativo!','s');
-            }else{
-                callback('C.I. y/o Contraseña incorrectos!');
-            }
+
+            FBQueries.existsPersonalData("Personal", results1 => {
+                if(results1 == "0"){
+                    callback('nada','nada');//Supuestamente nunca va devolver esta opcion
+                }else{ 
+                    //callback(results1,'lista');
+                    // console.log(results1);
+                    op = validarUsuario(results1, params.user, params.pass);
+                    usernameN = params.user;
+                    console.log("La opcion == "+op);
+                    if(op == 'profesor'){
+                        SesionActual = usernameN + " Cerrar Sesión";
+                        callback('Bienvenido Profesor!','p');
+                    }else if(op == 'secretario'){
+                        SesionActual = usernameN + " Cerrar Sesión";
+                        callback('Bienvenido Administrativo!','s');
+                    }else{
+                        callback('C.I. y/o Contraseña incorrectos!');
+                    }
+
+                }
+            });
+
+
         }
     });
+      //----------------------------------------------------------------------------------LOGOUT
     socket.on('logout', (params, callback) => {
         op='nada';
         SesionActual = 'Iniciar Sesión';
         
         callback('Sesión Finalizada!');
     });
+    //----------------------------------------------------------------------------------LOAD LIST
+    socket.on('load_list', (params, callback) => {
+        var curso = params.curso;
+        var paralelo = params.paralelo
 
-    socket.on('navegar', (params, callback) => {
-        console.log("Cambie de pagina, cambie de pagina");
-        callback();
+        FBQueries.existsData("Cursos/"+curso, paralelo, results1 => {
+            if(results1 == "0"){
+                callback('nada','nada');
+            }else{ 
+                callback(results1,'lista');
+            }
+        });
     });
-    //-----------------------------------------------------------------------UPDATES
+    //----------------------------------------------------------------------------------SEARCH USER
+    socket.on('buscar_usuario', (params, callback) => {
+        FBQueries.existsData("Padres", params.ci, results1 => {
+            if(results1 == "0"){
+                FBQueries.existsData("Estudiantes", params.ci, results2 => {
+                    if(results2 === "0"){
+                        callback('nada','nada');
+                    }else{
+                        callback(results2,'estudiante');
+                    }
+                });
+            }else{
+                callback(results1,'padre');
+            }
+        });
+    });
+       //----------------------------------------------------------------------------------SEARCH PERSONAL
+       socket.on('buscar_personal', (params, callback) => {
+        FBQueries.existsData("Personal", params.ci, results1 => {
+            if(results1 == "0"){
+                callback('nada','nada');
+            }else{
+                callback(results1,'personal');
+            }
+        });
+    });
+        //----------------------------------------------------------------------------------UPDATE PERSONAL
+        socket.on('update_per', (params, callback) => {
+            console.log("----------------- Empezando updates sobre el Personal");
+            FBQueries.deleteMateria("Personal", per_ci, resultados => {//borrar materia anterior
+                console.log("borre materia anterior");
+            });
+
+            var obj = `{"${per_ci}" : "${newPer.nombre + " " + newPer.apellidos}"}`;
+            obj = JSON.parse(obj);
+            FBQueries.pushData("Materias", newPer.materia, obj, resultados => {
+                console.log("Se guardo Curso");
+            });
+            
+            FBQueries.updateData('Personal', per_ci, newPer, resultados => {
+                console.log("Se actualizo Personal");
+            });
+            
+            callback();
+        });
+    //----------------------------------------------------------------------------------UPDATE ESTUDIANTE
     socket.on('update_est', (params, callback) => {
         console.log("----------------- Empezando updates sobre el estudiante");
-        getData.getData("Estudiantes", e_ci, resultados => {
+        FBQueries.deleteCurso("Estudiantes", e_ci, resultados => {
             console.log("consulte curso anterior");
         });
 
-        pushData.updateData('Estudiantes', e_ci, newStudent, resultados => {
+        FBQueries.updateData('Estudiantes', e_ci, newStudent, resultados => {
             console.log("Se actualizo estudiante");
         });
         
-        var obj = `{"${e_ci}" : "${e_ci}"}`;
+        var obj = `{"${e_ci}" : "${newStudent.paterno +" "+ newStudent.materno +" "+newStudent.nombre}"}`;
         obj = JSON.parse(obj);
-        pushData.pushData("Cursos/"+newStudent.curso, newStudent.paralelo, obj, resultados => {
+        FBQueries.pushData("Cursos/"+newStudent.curso, newStudent.paralelo, obj, resultados => {
             console.log("Se guardo Curso");
         });
         callback();
     });
+     //----------------------------------------------------------------------------------UPDATE APODERADO
     socket.on('update_dad', (params, callback) => {
-        pushData.updateData('Padres', p_ci, newDad, resultados => {
+        FBQueries.updateData('Padres', p_ci, newDad, resultados => {
             console.log("Se actualizo padre");
         });
         callback();
     });
-    //------------------------------------------------------------------------------
-    //------------------------------------------------------------GUARDAR ESTUDIANTE
+    //----------------------------------------------------------------------------------- BORRAR PERSONAL
+      socket.on('delete_per', (params, callback) => {
+        // console.log("----------------- Empezando deletes sobre el estudiante");
+        FBQueries.deleteMateria("Personal", params.ci, resultados => {
+            console.log("consulte materia anterior");
+        });
+
+        FBQueries.deleteData('Personal', params.ci, resultados => {
+            console.log("Se borro personal");
+        });
+        callback();
+    });
+    //----------------------------------------------------------------------------------- BORRAR ESTUDIANTE
+    socket.on('delete_est', (params, callback) => {
+        // console.log("----------------- Empezando deletes sobre el estudiante");
+        FBQueries.deleteCurso("Estudiantes", params.ci, resultados => {
+            console.log("consulte curso anterior");
+        });
+
+        FBQueries.deleteData('Estudiantes', params.ci, resultados => {
+            console.log("Se borro estudiante");
+        });
+        callback();
+    });
+    //----------------------------------------------------------------------------------- BORRAR PADRE
+    socket.on('delete_dad', (params, callback) => {
+        // console.log("----------------- Empezando deletes sobre el padre");
+        FBQueries.deleteData('Padres', params.ci, resultados => {
+            console.log("Se borro tutor");
+        });
+        callback();
+    });
+    
+    //-------------------------------------------------------------------------------------GUARDAR ESTUDIANTE
     socket.on('save_est', (params, callback) => {
         e_ci = params.eci;
         p_ci = params.ecpp;
@@ -106,17 +207,16 @@ io.on('connection', (socket) => {
             sexo: params.esex
         };
         //----
-        exists.exists("Padres",p_ci, results1 => {
-
+        FBQueries.exists("Padres",p_ci, results1 => {
             if(results1 == "1"){
-                exists.exists("Estudiantes",e_ci, results2 => {
+                FBQueries.exists("Estudiantes",e_ci, results2 => {
                     if(results2 == "0"){
-                        pushData.pushData("Estudiantes",e_ci, newStudent, resultados => {
+                        FBQueries.pushData("Estudiantes",e_ci, newStudent, resultados => {
                             console.log("Se guardo estudiante");
                         });
-                        var obj = `{"${e_ci}" : "${e_ci}"}`;
+                        var obj = `{"${e_ci}" : "${newStudent.paterno +" "+ newStudent.materno +" "+newStudent.nombre}"}`;
                         obj = JSON.parse(obj);
-                        pushData.pushData("Cursos/"+params.ecur, params.epar, obj, resultados => {
+                        FBQueries.pushData("Cursos/"+params.ecur, params.epar, obj, resultados => {
                             console.log("Se guardo Curso");
                         });
                         callback('Estudiante Añadido!','0');
@@ -128,11 +228,9 @@ io.on('connection', (socket) => {
             }else{
                 callback('El Carnet de Tutor no existe, deberia crearlo primero','2');
             }
-
         });
     });
-    //------------------------------------------------------------------------------
-    //-------------------------------------------------------------GUARDAR APODERADO
+    //------------------------------------------------------------------------------------ GUARDAR APODERADO
     socket.on('save_dad', (params, callback) => {
         p_ci = params.pci;
         newDad = { //Clase Apoderado--------------------------------------------
@@ -147,9 +245,9 @@ io.on('connection', (socket) => {
             parentesco: params.ppar
         };
         //----
-        exists.exists("Padres", p_ci, results => {
+        FBQueries.exists("Padres", p_ci, results => {
             if(results == "0"){
-                pushData.pushData("Padres",p_ci, newDad, resultados => {
+                FBQueries.pushData("Padres",p_ci, newDad, resultados => {
                     console.log("Se guardo Padre");
                 });
                 callback('Tutor Añadido!','0');
@@ -159,57 +257,40 @@ io.on('connection', (socket) => {
             }
         });
     });
-    
+        //------------------------------------------------------------------------------------ GUARDAR PERSONAL
+        socket.on('save_per', (params, callback) => {
+            per_ci = params.ppci;
+            newPer= { //Clase Apoderado--------------------------------------------
+                nombre: params.ppn,
+                apellidos: params.ppap,
+                ci_ext: params.ppdep1,
+                fech_nac: params.ppfn,
+                direccion: params.ppdir,
+                cargo: params.ppcar,
+                materia: params.ppmat,
+                contra: params.pcont
+            };
+            //----
+            FBQueries.exists("Personal", per_ci, results => {
+                if(results == "0"){
+                    FBQueries.pushData("Personal",per_ci, newPer, resultados => {
+                        console.log("Se guardo Tutor");
+                    });
+                    
+                    var obj = `{"${per_ci}" : "${newPer.nombre + " " + newPer.apellidos}"}`;
+                    obj = JSON.parse(obj);
+                    FBQueries.pushData("Materias", newPer.materia, obj, resultados => {
+                        console.log("Se guardo Curso");
+                    });
+                        
+                    callback('Personal Añadido!','0');
+                }else{
+                    console.log("Ese personal ya existe");
+                    callback('Este personal ya existe, ¿desea modificar sus atributos?','1');
+                }
+            });
+        });
 });
-//------------------------------------------------------------------------------
-
-// app.post('/nuevo_estudiante', function(req, res){
-//     console.log("Quiero guardar: ", req.body);
-
-//     var newStudent = { // Clase estudiante--------------------------------------------
-//         ci_padre: req.body.ecpp,
-//         nombre: req.body.en,
-//         paterno: req.body.eap,
-//         materno: req.body.eam,
-//         ci_ext: req.body.edep1,
-//         fech_nac: req.body.efn,
-//         pais_nac: req.body.ep,
-//         dpto_nac: req.body.edep2,
-//         prov_nac: req.body.eprov,
-//         loca_nac: req.body.eloc,
-//         curso: req.body.ecur,
-//         paralelo: req.body.epar,
-//         nombre: req.body.en
-//     };
-
-//     exists.exists("Estudiantes/"+req.body.eci, results => {
-//         f='1';
-//         if(results == "0"){
-//             pushData.pushData("Estudiantes",req.body.eci, newStudent, resultados => {
-//                 console.log("Se guardo estudiante");
-//             });
-//             pushData.pushData("Cursos", req.body.ecur + "/" + req.body.epar, req.body.eci, resultados => {
-//                console.log("Se guardo Curso");
-//             });
-//             m = 'Estudiante añadido';
-//         }else{
-//             console.log("Ese estudiante ya existe");
-//             m = 'Estudiante no se añadio por que ya existe.';  
-//         }
-//         res.redirect('/dashboard_sec');
-//     });
-// });
-
-// app.post('/nuevo_padre', function(req, res){
-//     console.log("Quiero guardar: ", req.body);
-
-//     res.render('dashboard_sec.hbs', {///<---- Aca debo redirigira una posicion de se ha guardado o eliminado
-//         logout: SesionActual,
-//         flag_e: f,
-//         msj_e: m
-//     });
-// });
-
 
 //------------------------------------------------------------------------------
 //---------------------------------------------------------ROUTERS ENTRE PAGINAS

@@ -16,7 +16,7 @@
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
 </head>
 
-<body class="" onload="cargarCargo()">
+<body class="" >
     <div class="sidebar" data-color="orange">
         <!--
     Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
@@ -113,29 +113,35 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="title">Datos de los empleados</h5>
+                                <h5 class="title" id="personal_tittle">Datos de los empleados</h5>
                             </div>
                             <div class="card-body">
-                                    <form>
-                                            <div class="input-group no-border">
-                                                <input type="text" value="" class="form-control" placeholder="Buscar CI ...">
-                                                <span class="input-group-addon">
-                                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                                </span>
-                                            </div>
-                                        </form>
-                                <form>
+                                <form id="search_personal">
+                                    <div class="input-group no-border">
+                                        <input type="number" class="form-control" placeholder="Buscar CI ..."
+                                            required= "required"  name="p_buscar">
+                                        
+                                        <span class="input-group-addon">
+                                            <i class="now-ui-icons ui-1_zoom-bold"></i>  
+                                            <input type="hidden">-------</input>
+                                            <input type="submit" value="Buscar" id="search_data2" 
+                                                style= "height:130%;">
+                                            
+                                        </span>                                  
+                                    </div>
+                                </form>
+                                <form id="send_personal">
                                     <div class="row">
                                         <div class="col-md-6 pr-1">
                                             <div class="form-group">
                                                 <label>Apellidos</label>
-                                                <input type="text" class="form-control" placeholder="Apellidos">
+                                                <input type="text" class="form-control" placeholder="Apellidos"required="required"name="ppap">
                                             </div>
                                         </div>
                                         <div class="col-md-6 pl-1">
                                             <div class="form-group">
                                                 <label>Nombres</label>
-                                                <input type="text" class="form-control" placeholder="Nombres">
+                                                <input type="text" class="form-control" placeholder="Nombres"required="required"name="ppn">
                                             </div>
                                         </div>
                                     </div>
@@ -143,19 +149,29 @@
                                         <div class="col-md-4 pr-1">
                                             <div class="form-group">
                                                 <label>Fecha de Nacimiento</label>
-                                                <input type="date" class="form-control">
+                                                <input type="date" class="form-control"required="required"name="ppfn">
                                             </div>
                                         </div>
                                         <div class="col-md-4 px-1">
                                             <div class="form-group">
                                                 <label>Carnet de Identidad</label>
-                                                <input type="number" class="form-control" placeholder="Carnet de Identidad">
+                                                <input type="number" class="form-control" placeholder="Carnet de Identidad"required="required"name="ppci">
                                             </div>
                                         </div>
                                         <div class="col-md-3 pl-1">
                                             <div class="form-group">
-                                                <label>Ex</label>
-                                                <input type="text" class="form-control">
+                                                <label>Expedido</label>
+                                                 <select name="ppdep1" class="form-control" class="form-control">
+                                                    <option value="La Paz">La Paz</option>
+                                                    <option value="Oruro">Oruro</option>
+                                                    <option value="Potosi">Potosi</option>
+                                                    <option value="Cbba">Cbba</option>
+                                                    <option value="Sucre">Sucre</option>
+                                                    <option value="Tarija">Tarija</option>
+                                                    <option value="Pando">Pando</option>
+                                                    <option value="Beni">Beni</option>
+                                                    <option value="Santa Cruz">Santa Cruz</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -164,78 +180,51 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Dirección de Domicilio</label>
-                                                <input type="text" class="form-control" placeholder="Dirección de Domicilio">
+                                                <input type="text" class="form-control" placeholder="Dirección de Domicilio"required="required"name="ppdir">
                                             </div>
                                         </div>
 
-                                    <script>    
-                                        function cargarCargo() {
-                                        var array = ["Profesor", "Administrativo", "Regente"];
-                                            array.sort();
-                                            addOptions("cargo", array);}
-
-
-                                        //Función para agregar opciones a un <select>.
-                                    function addOptions(domElement, array) {
-                                        var selector = document.getElementsByName(domElement)[0];
-                                        for (cargo in array) {
-                                            var opcion = document.createElement("option");
-                                            opcion.text = array[cargo];
-                                            // Añadimos un value a los option para hacer mas facil escoger los pueblos
-                                            opcion.value = array[cargo].toLowerCase();
-                                            selector.add(opcion);
-                                        }   
-                                    }    
-
-                                        
-                                        function cargarMaterias() { 
-                                           document.getElementById("materia").innerHTML=""; 
-                                        var listaMaterias = {
-                profesor: ["Matemáticas", "Química", "Física", "Biología", "C.Sociales","Ed.Física","Música","Lenguaje"] }
-
-
-                                        var cargos = document.getElementById('cargo')
-                                        var materias = document.getElementById('materia')
-                                        var cargoSeleccionado = cargos.value
-                                        
-                                        // Se limpian los materias
-                                        materias.innerHTML = '<option value="">Seleccione una Materia...</option>'
-                                        
-                                        if(cargoSeleccionado !== ''){
-                                        // Se seleccionan los materias y se ordenan
-                                        cargoSeleccionado = listaMaterias[cargoSeleccionado]
-                                        
-                                        // Insertamos los materias
-                                        cargoSeleccionado.forEach(function(materia){
-                                            let opcion = document.createElement('option')
-                                            opcion.value = materia
-                                            opcion.text = materia
-                                            materias.add(opcion) }); }
-                                                                                      
-                                            }
-                                            cargarCargo();   
-
-                                    </script>
+                            
 										<div class="col-md-3 pr-1">
 											<label>Cargo</label>
-											<select name= "cargo" id="cargo" class="form-control"  onchange="cargarMaterias();">
-											<option value="" >Seleccione un Cargo</option></select>										
+											<select name= "ppcar" id="cargo" class="form-control"  required="required">
+											        <option value="" >Seleccione un Cargo</option>
+                                                    <option value="Profesor">Profesor</option>
+                                                    <option value="Administrativo">Administrativo</option>
+                                                    <option value="Otros">Otros</option>
+                                            </select>										
                                         </div>
                                         <div class="col-md-3 pr-1" id="materia_asig">
                                                 <label>Materia</label>
-                                                <select name= "materia" id="materia" class="form-control">
-                                                <option value="" >Seleccione una Materia</option></select>							
+                                                <select name= "ppmat" id="materia" class="form-control"required="required">
+                                                    <option value="">Seleccione una Materia</option>
+                                                    <option value="Ninguna">Ninguna</option>
+                                                    <option value="Matematicas">Matematicas</option>
+                                                    <option value="Fisica">Física</option>
+                                                    <option value="Biologia">Biología</option>
+                                                    <option value="Geografia">Geografía</option>
+                                                    <option value="Literatura">Literatura</option>
+                                                    <option value="Artes_Plasticas">Artes Plasticas</option>
+                                                    <option value="Musica">Música</option>
+                                                    <option value="Educ_Fisica">Educ. Física</option>
+                                                    <option value="Quimica">Quimica</option>
+                                                    <option value="Filosofia">Filosofia</option>
+                                                    <option value="Civica">Civica</option>
+                                                    <option value="Psicologia">Psicologia</option>
+                                                    <option value="Ingles">Ingles</option>
+                                                </select>							
                                         </div>
 										<div class="col-md-5 pl-1">
 										<div class="form-group">
                                                 <label>Contraseña</label>
-                                                <input type="text" class="form-control" placeholder="Contraseña">
+                                                <input type="text" class="form-control" placeholder="Contraseña" required="required"name="pcont">
                                         </div>
 										</div>
                                     </div> 
 								<center>		
-                                <input class="btn btn-primary" type="submit" value="Registrar">
-                                <input class="btn btn-primary" type="submit" value="Eliminar">
+                                <input class="btn btn-primary" type="submit" value="Registrar"id="guardar_per">
+                                <input class="btn btn-primary" type="submit" value="Eliminar" id="borrar_per" 
+                                            style= "background-color: #f44336; color: white; height:130%">
 								</center>
 																	
                                 </form>

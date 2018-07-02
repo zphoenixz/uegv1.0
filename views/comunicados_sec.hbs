@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
 </head>
-<body class="" onload="cargarCargo()">
+<body class="" >
     <div class="sidebar" data-color="orange">
         <!--
     Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
@@ -127,32 +127,6 @@
 
 						<div class="table-full-width table-responsive">
                                 <div class="row">
-                                        <script>    
-                                        function cargarCargo() {
-                                        var array = ["Noticia", "Evento"];
-                                            array.sort();
-                                            addOptions("Tipo", array);}
-
-
-                                        //Función para agregar opciones a un <select>.
-                                    function addOptions(domElement, array) {
-                                        var selector = document.getElementsByName(domElement)[0];
-                                        for (cargo in array) {
-                                            var opcion = document.createElement("option");
-                                            opcion.text = array[cargo];
-                                            // Añadimos un value a los option para hacer mas facil escoger los pueblos
-                                            opcion.value = array[cargo].toLowerCase();
-                                            selector.add(opcion);
-                                        }   
-                                    }    
-
-                                        
-                                        var cargos = document.getElementById('Tipo')
-                                        var cargoSeleccionado = cargos.value
-                                        
-                                        cargarCargo();   
-
-                                    </script>
 										<div class="col-md-3 pr-1">
 											<label>Tipo</label>
 											<select name= "Tipo" id="Tipo" class="form-control"  onchange="cargarMaterias();">

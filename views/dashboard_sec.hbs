@@ -116,15 +116,21 @@
                         <div class="card">
 					
                             <div class="card-header">
-                                <h5 class="title">Datos del Estudiante</h5>
+                                <h5 class="title" id="student_tittle">Datos del Estudiante</h5>
                             </div>
                             			
-							<form>
+							<form id="search_user">
                                 <div class="input-group no-border">
-                                    <input type="text" value="" class="form-control" placeholder="Buscar CI ...">
+                                    <input type="number" class="form-control" placeholder="Buscar CI ..."
+                                         required= "required"  name="a_buscar">
+                                    
                                     <span class="input-group-addon">
-                                        <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                    </span>
+                                        <i class="now-ui-icons ui-1_zoom-bold"></i>  
+                                        <input type="hidden">-------</input>
+                                        <input type="submit" value="Buscar" id="search_data" 
+                                            style= "height:130%;">
+                                        
+                                    </span>                                  
                                 </div>
                             </form>
                             <!--action = "/nuevo_estudiante" method="post"--> 
@@ -186,7 +192,7 @@
                                                 <input type="date" class="form-control" placeholder="Fecha de Nacimiento" name="efn" required="required">
                                         </div>
                                         </div>
-										<div class="col-md-3 px-1">
+										<div class="col-md-3 pr-1">
                                             <div class="form-group">
                                                 <label>Sexo</label>
                                                 <select name="esex" class="form-control" >
@@ -204,13 +210,13 @@
                                                 <label>LUGAR DE NACIMIENTO</label>
                                             </div>
                                         </div>
-                                         <div class="col-md-5 pr-1">
+                                         <div class="col-md-5 px-1">
                                             <div class="form-group">
                                                 <label>País</label>
                                                 <input type="text" class="form-control" placeholder="País" name="ep" required="required">
                                             </div>
                                         </div>
-                                        <div class="col-md-5 px-1">
+                                        <div class="col-md-3 pr-1">
                                             <div class="form-group">
                                                 <label>Departamento</label>
         
@@ -243,9 +249,9 @@
 										<div class="col-md-3 pr-1">
 											<label>Curso</label>
 											<select id="curso" class="form-control" name="ecur">
-                                                <option value="1ero" >1º Secundaria</option>
+                                                <option value="1ero">1º Secundaria</option>
                                                 <option value="2do" >2º Secundaria</option>
-                                                <option value="3ero" >3º Secundaria</option>
+                                                <option value="3ero">3º Secundaria</option>
                                                 <option value="4to" >4º Secundaria</option>
                                                 <option value="5to" >5º Secundaria</option>
                                                 <option value="6to" >6º Secundaria</option>	
@@ -265,6 +271,8 @@
                                     </div>
                                     <center>	    
                                         <input class="btn btn-primary" type="submit" value="Guardar" id="guardar_est" >
+                                        <input class="btn btn-primary" type="submit" value="Eliminar" id="borrar_est" 
+                                            style= "background-color: #f44336; color: white; height:130%">
 								    </center>
                                 
                             </div>
@@ -282,7 +290,7 @@
                         <div class="card">
 					
                             <div class="card-header">
-                                <h5 class="title"> Datos del Tutor</h5>
+                                <h5 class="title" id="dad_tittle"> Datos del Tutor</h5>
                             </div>					
 							
                             <form id="send_data2">
@@ -370,6 +378,8 @@
 									</div>
 									<center>		    
                                         <input class="btn btn-primary" type="submit" value="Guardar" id="guardar_dad" >
+                                        <input class="btn btn-primary" type="submit" value="Eliminar" id="borrar_dad" 
+                                            style= "background-color: #f44336; color: white; height:130%">
 								    </center>
 								
 							</div>       

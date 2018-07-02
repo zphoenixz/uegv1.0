@@ -14,6 +14,33 @@
     <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 12px 190px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 14px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button2 {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #008CBA;
+        }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+    </style>
 </head>
 
 <body class="">
@@ -117,37 +144,40 @@
                                 <h4 class="card-title"> Lista de Alumnos</h4>
                             </div>
                             <div class="card-body">
-							
-							
-							
-													<div class="table-full-width table-responsive">
+						<form id="get_list">
+						<div class="table-full-width table-responsive">
 								<div class="row">
+                                    
 										<div class="col-md-3 pr-1">
 											<label>Curso</label>
-											<select id="curso" class="form-control">
-											<option value="01" >1º</option>
-											<option value="02" >2º</option>
-											<option value="03" >3º</option>
-											<option value="04" >4º</option>
-											<option value="05" >5º</option>
-											<option value="06" >6º</option>	</select>										
+											<select id="curso" class="form-control"name="lcur">
+										        <option value="1ero">1º Secundaria</option>
+                                                <option value="2do" >2º Secundaria</option>
+                                                <option value="3ero">3º Secundaria</option>
+                                                <option value="4to" >4º Secundaria</option>
+                                                <option value="5to" >5º Secundaria</option>
+                                                <option value="6to" >6º Secundaria</option>	
+                                            </select>										
 										</div>
 										
 										<div class="col-md-3 pr-1">
 											<label>Paralelo</label>
-											<select id="paralelo" class="form-control">
-											<option value="01" >A</option>
-											<option value="02" >B</option>
-											<option value="03" >C</option></select>										
+											<select id="paralelo" class="form-control"name="lpar">
+											    <option value="Par_A" >A</option>
+                                                <option value="Par_B" >B</option>
+                                                <option value="Par_C" >C</option>
+                                            </select>										
 										</div>
-										
+                                        
+                                        <div class="col-md-3 pr-1">
+                                            <input class="button button2"type="submit" value="Cargar lista" >									
+                                        </div>
+                                    
 								</div>
 						</div>
-							
-							
-							
+                        </form>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table" >
                                         <thead class=" text-primary">
                                             <th>
                                                 Nro
@@ -162,24 +192,12 @@
                                                 Nombres
                                             </th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    Espinoza
-                                                </td>
-                                                <td>
-                                                    Torrico
-                                                </td>
-                                                <td >
-                                                    Lucia Fernanda
-                                                </td>
-                                            </tr>
-                                            
+                                        <tbody id="lista_curso">
+                                          
+    
                                         </tbody>
                                     </table>
+                                
                                 </div>
                             </div>
                         </div>

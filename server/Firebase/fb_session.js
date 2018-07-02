@@ -1,9 +1,7 @@
 const request = require('request');
 var admin = require("firebase-admin");
 //................................................................................FB
-// Fetch the service account key JSON file contents
 var serviceAccount = require("../utils/ue-gualberto-villarroel-firebase-adminsdk-801k0-7fcb34097f.json");
-// Initialize the app with a service account, granting admin privileges
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://ue-gualberto-villarroel.firebaseio.com/"
@@ -14,7 +12,19 @@ admin.initializeApp({
 // ref.once("value", function(snapshot) {
 //   console.log(snapshot.val());
 // });
-var getData = (dirname, key, callback) => {
+//-------------------------------------------------------------------------DELETEDATA
+var deleteData = (dirname, key, callback) => {
+    var db1 = admin.database();
+    var ref_1 = db1.ref(dirname);
+    var ref_2 = ref_1.child(key);
+
+    ref_2.once("value", function(snapshot) {
+        ref_2.remove();
+    });
+    callback();
+};
+//------------------------------------------------------------------------- DELETECURSO
+var deleteCurso = (dirname, key, callback) => {
     var db1 = admin.database();
     var ref_1 = db1.ref(dirname);
     var ref_2 = ref_1.child(key);
@@ -32,6 +42,24 @@ var getData = (dirname, key, callback) => {
     });
     callback();
 };
+//------------------------------------------------------------------------- DELETEMATERIA
+var deleteMateria = (dirname, key, callback) => {
+    var db1 = admin.database();
+    var ref_1 = db1.ref(dirname);
+    var ref_2 = ref_1.child(key);
+
+    var db2 = admin.database();
+    ref_2.once("value", function(snapshot) {
+        var materia = (snapshot.val()).materia;
+        console.log("-------> ", materia);
+        //"Cursos/"+newStudent.curso, newStudent.paralelo, obj
+        var ref_11 = db2.ref("Materias/"+materia);
+        var ref_22 = ref_11.child(key);
+        ref_22.remove();
+    });
+    callback();
+};
+//-------------------------------------------------------------------------PUSHDATA
 var pushData = (dirname, key, data, callback) => {
     var db = admin.database();
     var ref_1 = db.ref(dirname);
@@ -41,6 +69,7 @@ var pushData = (dirname, key, data, callback) => {
     });
     callback();
 };
+//-------------------------------------------------------------------------UPDATEDATA
 var updateData = (dirname, key, data, callback) => {
     var db = admin.database();
     var ref_1 = db.ref(dirname);
@@ -50,6 +79,7 @@ var updateData = (dirname, key, data, callback) => {
     });
     callback();
 };
+//-------------------------------------------------------------------------EXISTS BOOLEAN
 var exists = (dirname, key, callback) => {
     var db = admin.database();
     //var ref = db.ref("server/saving-data/fireblog/posts");
@@ -60,11 +90,42 @@ var exists = (dirname, key, callback) => {
         if(snapshot.val() != null){
             console.log("Retorna true!");
             callback("1");
-            //return true;
         }else{
             console.log("Retorna false!");
             callback("0");
-            //return false;
+        }
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    });
+};
+//-------------------------------------------------------------------------EXISTS DATA
+var existsData = (dirname, key, callback) => {
+    var db = admin.database();
+    //var ref = db.ref("server/saving-data/fireblog/posts");
+    var ref_1 = db.ref(dirname);
+    var ref_2 = ref_1.child(key);
+    ref_2.once("value", function(snapshot) {
+        console.log(snapshot.val());
+        if(snapshot.val() != null){
+            callback(snapshot.val());
+        }else{
+            callback("0");
+        }
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    });
+};
+//-------------------------------------------------------------------------EXISTS DATA
+var existsPersonalData = (key, callback) => {
+    var db = admin.database();
+    var ref_1 = db.ref();
+    var ref_2 = ref_1.child(key);
+    ref_2.once("value", function(snapshot) {
+        console.log(snapshot.val());
+        if(snapshot.val() != null){
+            callback(snapshot.val());
+        }else{
+            callback("0");
         }
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
@@ -74,7 +135,11 @@ var exists = (dirname, key, callback) => {
 module.exports.pushData = pushData;
 module.exports.exists = exists;
 module.exports.updateData = updateData;
-module.exports.getData = getData;
+module.exports.deleteCurso = deleteCurso;
+module.exports.existsData = existsData;
+module.exports.deleteData = deleteData;
+module.exports.deleteMateria = deleteMateria;
+module.exports.existsPersonalData = existsPersonalData;
 //.................................................................................
 
 //ejm 1-------------------------------------------------------------------
