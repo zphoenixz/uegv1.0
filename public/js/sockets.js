@@ -273,9 +273,9 @@ function myFunction5() {
         
     }
     for(var i=1;i<=cantidad_alumnos;i++){
-        p1s[(i-1)] = ns[(i-1)][0]*0.1+ns[(i-1)][1]*0.35+ns[(i-1)][2]*0.35+ns[(i-1)][3]*0.1;
-        p2s[(i-1)] = ns[(i-1)][4]*0.05+ns[(i-1)][5]*0.05;
-        p3s[(i-1)] = p1s[(i-1)] + p2s[(i-1)] ;
+        p1s[(i-1)] = Math.round((ns[(i-1)][0]*0.1+ns[(i-1)][1]*0.35+ns[(i-1)][2]*0.35+ns[(i-1)][3]*0.1)*100)/100;
+        p2s[(i-1)] = Math.round((ns[(i-1)][4]*0.05+ns[(i-1)][5]*0.05)*100)/100;
+        p3s[(i-1)] = Math.round((p1s[(i-1)] + p2s[(i-1)])*100)/100;
     }
     for(var i=1;i<=cantidad_alumnos;i++){
         for(var j=1;j<=3;j++){
