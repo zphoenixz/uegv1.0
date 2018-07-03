@@ -13,9 +13,9 @@ var validarUsuario = (usuarios, usr, pass) => {
         console.log("usuarioN: "+usrN+":: ContraN: "+passN);
         console.log("usuario: "+usr+":: Contra: "+pass);
         if( usrN == usr && passN == pass && cargo == "Profesor")
-            tipo = 'profesor';
+            tipo = element.materia;
         else if( usrN == usr && passN == pass && cargo == "Administrativo")
-            tipo = 'secretario';
+            tipo = element.materia;
     });
     return tipo;
 

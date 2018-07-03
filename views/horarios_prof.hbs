@@ -16,7 +16,7 @@
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
 </head>
 
-<body class="">
+<body onload="myFunction4()">
     <div class="wrapper ">
         <div class="sidebar" data-color="orange">
             <!--
@@ -112,21 +112,23 @@
 								<div class="row">
 										<div class="col-md-3 pr-1">
 											<label>Curso</label>
-											<select id="curso" class="form-control">
-											<option value="01" >1º</option>
-											<option value="02" >2º</option>
-											<option value="03" >3º</option>
-											<option value="04" >4º</option>
-											<option value="05" >5º</option>
-											<option value="06" >6º</option>	</select>										
+											<select id="curso" class="form-control" name="hhcur" onchange="myFunction4()">
+                                                <option value="1ero">1º Secundaria</option>
+                                                <option value="2do" >2º Secundaria</option>
+                                                <option value="3ero">3º Secundaria</option>
+                                                <option value="4to" >4º Secundaria</option>
+                                                <option value="5to" >5º Secundaria</option>
+                                                <option value="6to" >6º Secundaria</option>	
+                                            </select>											
 										</div>
 										
 										<div class="col-md-3 pr-1">
 											<label>Paralelo</label>
-											<select id="paralelo" class="form-control">
-											<option value="01" >A</option>
-											<option value="02" >B</option>
-											<option value="03" >C</option></select>										
+											<select id="paralelo" class="form-control" name="hhpar" onchange="myFunction4()">
+                                                <option value="Par_A" >A</option>
+                                                <option value="Par_B" >B</option>
+                                                <option value="Par_C" >C</option>
+                                            </select>										
 										</div>
 										
 								</div>
@@ -142,83 +144,44 @@
 							  <th>VIERNES</th>							  
                             </thead>						  						  
                             <tbody>
-                                <tr>
+                                <tr id="lista_1">
 									<th>08:00 - 08:45</th>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>								
                                 </tr>
 								
-								<tr>
-									<th>08:45 - 09:30</th>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>								
+								<tr id="lista_2">
+									<th>08:45 - 09:30</th>					
                                 </tr>
 								
-								<tr>
-									<th>09:30 - 10:15</th>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>								
-								<tr>
-									<th>10:15 - 11:00</th>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>								
+								<tr id="lista_3">
+									<th>09:30 - 10:15</th>	
+								</tr>						
+								<tr id="lista_4">
+									<th>10:15 - 11:00</th>						
                                 </tr>
 								
 								<tr>
 									<th>11:00 - 11:30</th>
-								<td class="text-left"> R </td>
-								<td class="text-left"> E </td>
-								<td class="text-left"> C R </td>
-								<td class="text-left"> E </td>
-								<td class="text-left"> O </td>								
+                                    <td class="text-left"> R </td>
+                                    <td class="text-left"> E </td>
+                                    <td class="text-left"> C R </td>
+                                    <td class="text-left"> E </td>
+                                    <td class="text-left"> O </td>								
                                 </tr>
 								
-								<tr>
-									<th>11:30 - 12:15</th>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>									
+								<tr id="lista_5">
+									<th>11:30 - 12:15</th>								
                                 </tr>
 								
-								<tr>
-									<th>12:15 - 13:00</th>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>									
+								<tr id="lista_6">
+									<th>12:15 - 13:00</th>								
                                 </tr>
 								
-								<tr>
-									<th>13:00 - 13:35</th>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>								
+								<tr id="lista_7">
+									<th>13:00 - 13:35</th>							
                                 </tr>
 
-								<tr>
-									<th>13:35 - 14:10</th>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>
-								<td class="text-left"> ---</td>								
+								<tr id="lista_8">
+									<th>13:35 - 14:10</th>							
                                 </tr>		
                               
                             </tbody>

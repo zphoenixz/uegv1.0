@@ -8,6 +8,81 @@ socket.on('connect', function () {
 socket.on('disconnect', function () {
 
 });
+//============================================================================================== HORARIOS
+jQuery('#send_schedule').on('submit', function(e){
+    e.preventDefault();
+    var BotonGuardar = jQuery('#guardar_sche');
+    BotonGuardar.attr('disabled', 'disabled').prop('value', 'Guardando....'); 
+
+    var curso = jQuery('[name=hcur]').val();
+    var para = jQuery('[name=hpar]').val();
+
+    var lu1 = jQuery('[name=lu_0800]').val();
+    var lu2 = jQuery('[name=lu_0845]').val();
+    var lu3 = jQuery('[name=lu_0930]').val();
+    var lu4 = jQuery('[name=lu_1015]').val();
+    var lu5 = jQuery('[name=lu_1130]').val();
+    var lu6 = jQuery('[name=lu_1215]').val();
+    var lu7 = jQuery('[name=lu_1300]').val();
+    var lu8 = jQuery('[name=lu_1335]').val();
+    var lunes = "a/"+lu1+"/"+lu2+"/"+lu3+"/"+lu4+"/"+lu5+"/"+lu6+"/"+lu7+"/"+lu8;
+
+    var ma1 = jQuery('[name=ma_0800]').val();
+    var ma2 = jQuery('[name=ma_0845]').val();
+    var ma3 = jQuery('[name=ma_0930]').val();
+    var ma4 = jQuery('[name=ma_1015]').val();
+    var ma5 = jQuery('[name=ma_1130]').val();
+    var ma6 = jQuery('[name=ma_1215]').val();
+    var ma7 = jQuery('[name=ma_1300]').val();
+    var ma8 = jQuery('[name=ma_1335]').val();
+    var martes = "b/"+ma1+"/"+ma2+"/"+ma3+"/"+ma4+"/"+ma5+"/"+ma6+"/"+ma7+"/"+ma8;
+
+    var mi1 = jQuery('[name=mi_0800]').val();
+    var mi2 = jQuery('[name=mi_0845]').val();
+    var mi3 = jQuery('[name=mi_0930]').val();
+    var mi4 = jQuery('[name=mi_1015]').val();
+    var mi5 = jQuery('[name=mi_1130]').val();
+    var mi6 = jQuery('[name=mi_1215]').val();
+    var mi7 = jQuery('[name=mi_1300]').val();
+    var mi8 = jQuery('[name=mi_1335]').val();
+    var miercoles = "c/"+mi1+"/"+mi2+"/"+mi3+"/"+mi4+"/"+mi5+"/"+mi6+"/"+mi7+"/"+mi8;
+
+    var ju1 = jQuery('[name=ju_0800]').val();
+    var ju2 = jQuery('[name=ju_0845]').val();
+    var ju3 = jQuery('[name=ju_0930]').val();
+    var ju4 = jQuery('[name=ju_1015]').val();
+    var ju5 = jQuery('[name=ju_1130]').val();
+    var ju6 = jQuery('[name=ju_1215]').val();
+    var ju7 = jQuery('[name=ju_1300]').val();
+    var ju8 = jQuery('[name=ju_1335]').val();
+    var jueves = "d/"+ju1+"/"+ju2+"/"+ju3+"/"+ju4+"/"+ju5+"/"+ju6+"/"+ju7+"/"+ju8;
+
+    var vi1 = jQuery('[name=vi_0800]').val();
+    var vi2 = jQuery('[name=vi_0845]').val();
+    var vi3 = jQuery('[name=vi_0930]').val();
+    var vi4 = jQuery('[name=vi_1015]').val();
+    var vi5 = jQuery('[name=vi_1130]').val();
+    var vi6 = jQuery('[name=vi_1215]').val();
+    var vi7 = jQuery('[name=vi_1300]').val();
+    var vi8 = jQuery('[name=vi_1335]').val();
+    var viernes = "e/"+vi1+"/"+vi2+"/"+vi3+"/"+vi4+"/"+vi5+"/"+vi6+"/"+vi7+"/"+vi8;
+
+    console.log("curso: "+curso,"paralelo: "+para);
+    socket.emit('save_sche', {
+        cur: curso,
+        par: para,
+        lunes: lunes,
+        martes: martes,
+        miercoles: miercoles,
+        jueves: jueves,
+        viernes: viernes
+    }, function (msj,tipo) {
+        if(msj){
+            alert(msj);
+            window.location.href = '/horarios_sec';
+        }
+    });
+});
 //============================================================================================== ENTREVISTAS
 function myFunction() {
 
@@ -87,6 +162,171 @@ function myFunction3() {
             }
         });
     }
+
+    function myFunction4() {
+        var curs = jQuery('[name=hhcur]').val();
+        var par = jQuery('[name=hhpar]').val();
+        jQuery('#lista_1').empty();
+        jQuery('#lista_2').empty();
+        jQuery('#lista_3').empty();
+        jQuery('#lista_4').empty();
+        jQuery('#lista_5').empty();
+        jQuery('#lista_6').empty();
+        jQuery('#lista_7').empty();
+        jQuery('#lista_8').empty();
+        socket.emit('load_holist', {
+            curso: curs,
+            paralelo: par
+        }, function (msj,tipo) {
+            var l1= jQuery('#lista_1');
+            var l2= jQuery('#lista_2');
+            var l3= jQuery('#lista_3');
+            var l4= jQuery('#lista_4');
+            var l5= jQuery('#lista_5');
+            var l6= jQuery('#lista_6');
+            var l7= jQuery('#lista_7');
+            var l8= jQuery('#lista_8');
+            if(tipo == "lista"){
+                var todosLosDatos = (Object.values(msj)).sort();
+                
+                console.log(todosLosDatos);
+                l1.append(`<th><b>08:00 - 08:45</b></th>`);
+                l2.append(`<th><b>08:45 - 09:30</b></th>`);
+                l3.append(`<th><b>09:30 - 10:15</b></th>`);
+                l4.append(`<th><b>10:15 - 11:00</b></th>`);
+                l5.append(`<th><b>11:30 - 12:15</b></th>`);
+                l6.append(`<th><b>12:15 - 13:00</b></th>`);
+                l7.append(`<th><b>13:00 - 13:35</b></th>`);
+                l8.append(`<th><b>13:35 - 14:10</b></th>`);
+                todosLosDatos.forEach(function(element) {
+                    var DiaEntero = element.split("/");
+                    if(DiaEntero[0] == 'a'){
+                        l1.append(`<td class="text-left"><b>${DiaEntero[1]}</b></td>`);
+                        l2.append(`<td class="text-left"><b>${DiaEntero[2]}</b></td>`);
+                        l3.append(`<td class="text-left"><b>${DiaEntero[3]}</b></td>`);
+                        l4.append(`<td class="text-left"><b>${DiaEntero[4]}</b></td>`);
+                        l5.append(`<td class="text-left"><b>${DiaEntero[5]}</b></td>`);
+                        l6.append(`<td class="text-left"><b>${DiaEntero[6]}</b></td>`);
+                        l7.append(`<td class="text-left"><b>${DiaEntero[7]}</b></td>`);
+                        l8.append(`<td class="text-left"><b>${DiaEntero[8]}</b></td>`);
+                    }else if(DiaEntero[0] == 'b'){
+                        l1.append(`<td class="text-left"><b>${DiaEntero[1]}</b></td>`);
+                        l2.append(`<td class="text-left"><b>${DiaEntero[2]}</b></td>`);
+                        l3.append(`<td class="text-left"><b>${DiaEntero[3]}</b></td>`);
+                        l4.append(`<td class="text-left"><b>${DiaEntero[4]}</b></td>`);
+                        l5.append(`<td class="text-left"><b>${DiaEntero[5]}</b></td>`);
+                        l6.append(`<td class="text-left"><b>${DiaEntero[6]}</b></td>`);
+                        l7.append(`<td class="text-left"><b>${DiaEntero[7]}</b></td>`);
+                        l8.append(`<td class="text-left"><b>${DiaEntero[8]}</b></td>`);
+                    }else if(DiaEntero[0] == 'c'){
+                        l1.append(`<td class="text-left"><b>${DiaEntero[1]}</b></td>`);
+                        l2.append(`<td class="text-left"><b>${DiaEntero[2]}</b></td>`);
+                        l3.append(`<td class="text-left"><b>${DiaEntero[3]}</b></td>`);
+                        l4.append(`<td class="text-left"><b>${DiaEntero[4]}</b></td>`);
+                        l5.append(`<td class="text-left"><b>${DiaEntero[5]}</b></td>`);
+                        l6.append(`<td class="text-left"><b>${DiaEntero[6]}</b></td>`);
+                        l7.append(`<td class="text-left"><b>${DiaEntero[7]}</b></td>`);
+                        l8.append(`<td class="text-left"><b>${DiaEntero[8]}</b></td>`);
+                    }else if(DiaEntero[0] == 'd'){
+                        l1.append(`<td class="text-left"><b>${DiaEntero[1]}</b></td>`);
+                        l2.append(`<td class="text-left"><b>${DiaEntero[2]}</b></td>`);
+                        l3.append(`<td class="text-left"><b>${DiaEntero[3]}</b></td>`);
+                        l4.append(`<td class="text-left"><b>${DiaEntero[4]}</b></td>`);
+                        l5.append(`<td class="text-left"><b>${DiaEntero[5]}</b></td>`);
+                        l6.append(`<td class="text-left"><b>${DiaEntero[6]}</b></td>`);
+                        l7.append(`<td class="text-left"><b>${DiaEntero[7]}</b></td>`);
+                        l8.append(`<td class="text-left"><b>${DiaEntero[8]}</b></td>`);
+                    }else if(DiaEntero[0] == 'e'){
+                        l1.append(`<td class="text-left"><b>${DiaEntero[1]}</b></td>`);
+                        l2.append(`<td class="text-left"><b>${DiaEntero[2]}</b></td>`);
+                        l3.append(`<td class="text-left"><b>${DiaEntero[3]}</b></td>`);
+                        l4.append(`<td class="text-left"><b>${DiaEntero[4]}</b></td>`);
+                        l5.append(`<td class="text-left"><b>${DiaEntero[5]}</b></td>`);
+                        l6.append(`<td class="text-left"><b>${DiaEntero[6]}</b></td>`);
+                        l7.append(`<td class="text-left"><b>${DiaEntero[7]}</b></td>`);
+                        l8.append(`<td class="text-left"><b>${DiaEntero[8]}</b></td>`);
+                    }
+                    
+                });
+    
+            }else{
+                alert("No existen horarios registrados");
+            }
+        });
+    }
+var ns = [];
+var labels = [];
+var p1s = [];
+var p2s = [];
+var p3s = [];
+function myFunction5() {
+    console.log("entre!!!!");
+
+    for(var i=1;i<=cantidad_alumnos;i++){
+        ns[(i-1)] = [];
+        labels[(i-1)] = [];
+        for(var j=1;j<=6;j++){
+            ns[(i-1)][(j-1)] = jQuery(`[name=${i}${j}]`).val();
+            if(j<=3)
+                labels[(i-1)][(j-1)] = jQuery(`#${i}${j}`);
+        }
+        
+    }
+    for(var i=1;i<=cantidad_alumnos;i++){
+        p1s[(i-1)] = ns[(i-1)][0]*0.1+ns[(i-1)][1]*0.35+ns[(i-1)][2]*0.35+ns[(i-1)][3]*0.1;
+        p2s[(i-1)] = ns[(i-1)][4]*0.05+ns[(i-1)][5]*0.05;
+        p3s[(i-1)] = p1s[(i-1)] + p2s[(i-1)] ;
+    }
+    for(var i=1;i<=cantidad_alumnos;i++){
+        for(var j=1;j<=3;j++){
+            labels[(i-1)][(j-1)].css("font-weight","bold").text(p1s[(i-1)].toString()); 
+            labels[(i-1)][(j-1)].css("font-weight","bold").text(p2s[(i-1)].toString()); 
+            labels[(i-1)][(j-1)].css("font-weight","bold").text(p3s[(i-1)].toString()); 
+        }
+        
+    }
+}
+var cantidad_alumnos;//<---------------------------------------------------------------------CANTIDAD DE ALUMNOS
+function myFunction6() {
+    jQuery('#lista_curso_nota').empty();
+    var ncur = jQuery('[name=ncur]');
+    var npar = jQuery('[name=npar]');
+    var list = jQuery('#lista_curso_nota');
+    socket.emit('load_list', {
+        curso: ncur.val(),
+        paralelo: npar.val()
+    }, function (msj,tipo) {
+        if(tipo == "lista"){
+            var nombre_completo = (Object.values(msj)).sort();
+            cantidad_alumnos = 0;
+
+            nombre_completo.forEach(function(element) {
+                cantidad_alumnos++;
+                var arr = element.split(" ");
+                var paterno = arr[0];
+                var materno = arr[1];
+                var nombres = arr[2];
+
+                list.append(`<tr>
+                <td class="not"style="width:50px;"align="center">${cantidad_alumnos}</td>
+                <td class="not"style="width:250px"align="center">${paterno+" "+materno+" "+nombres}</td>
+                <td class="not"><input name="${cantidad_alumnos}1"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
+                <td class="not"><input name="${cantidad_alumnos}2"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
+                <td class="not"><input name="${cantidad_alumnos}3"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
+                <td class="not"><input name="${cantidad_alumnos}4"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
+                <td class="not"><label id="${cantidad_alumnos}1"style="width:50px"></label></td>
+                <td class="not"><input name="${cantidad_alumnos}5"onchange="myFunction5()"type="number"style="width:50px" min="0"max="100"required="required"></td>
+                <td class="not"><input name="${cantidad_alumnos}6"onchange="myFunction5()"type="number"style="width:50px" min="0"max="100"required="required"></td>
+                <td class="not"><label id="${cantidad_alumnos}2"style="width:50px"></label></td>
+                <td class="not"><label id="${cantidad_alumnos}3"style="width:50px"></label></td>
+                </tr>`);
+            });
+        }else{
+            alert("El curso todavia no cuenta con Estudiantes inscritos");
+        }
+    });
+}
+    
 //-------------------------------------------------- ENVIAR DATOS ENTREVISTA
 jQuery('#send_ent').on('submit', function(e){
     e.preventDefault();
@@ -148,6 +388,18 @@ jQuery('#get_list').on('submit', function(e){
         paralelo: lpar.val()
     }, function (msj,tipo) {
         if(tipo == "lista"){
+            console.log("La lista extraida!!!");
+
+            //----------------------------------------------
+            var key;
+            for(key in msj){
+                if(msj.hasOwnProperty(key)){
+                    console.log(key + " = " +msj[key]);
+                }
+            }
+            //----------------------------------------------
+            
+
             var nombre_completo = (Object.values(msj)).sort();
             var nro = 0;
 

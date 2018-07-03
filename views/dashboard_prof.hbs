@@ -14,9 +14,22 @@
     <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/now-ui-dashboard.css" rel="stylesheet" />
+
+    <style>
+        .not {
+            border-top: 2px solid #000000; 
+            border-bottom: 2px solid #000000; 
+            border-left: 2px solid #000000; 
+            border-right: 2px solid #000000;
+            align:left;
+            vertical-align: bottom;
+            font color: #000000;
+        }
+
+    </style>
 </head>
 
-<body class="">
+<body onload="myFunction6()">
     <div class="wrapper ">
         <div class="sidebar" data-color="orange">
             <!--
@@ -103,123 +116,90 @@
                     <div class="col-lg-14">
                         <div class="card card-chart">
                             <div class="card-header">
-                                <h4 class="card-title">Registro de Notas</h4>
-                                <div class="dropdown">
-									
-                                </div>
-								<center>
+                            <h4 class="card-title">Registro de Notas</h4>
+                            <div class="dropdown">
+							   </div>
+								
 								<div>
-										<div class="col-md-7 pr-1">
-											<select id="curso" class="form-control">
-											<option value="01" >1º Bimestre</option>
-											<option value="02" >2º Bimestre</option>
-											<option value="03" >3º Bimestre</option>
-											<option value="04" >4º Bimestre</option>
-										    </select>										
-										</div>	
+									<div class="table-full-width table-responsive">
+										<select id="curso" class="form-control"name="nbim">
+			    							<option value="1er" >1er Bimestre</option>
+		    								<option value="2do" >2do Bimestre</option>
+	    									<option value="3er" >3er Bimestre</option>
+    										<option value="4to" >4to Bimestre</option>
+									    </select>										
+									</div>	
 								</div>
-								</center>
+                        {{!-- <form id="get_list"> --}}
+						<div class="table-full-width table-responsive">
+							<div class="row">                          
+                                    <div class="col-md-3 pr-1">
+                                        <label>Curso</label>
+                                        <select id="curso" class="form-control"name="ncur"onchange="myFunction6()">
+                                            <option value="1ero">1º Secundaria</option>
+                                            <option value="2do" >2º Secundaria</option>
+                                            <option value="3ero">3º Secundaria</option>
+                                            <option value="4to" >4º Secundaria</option>
+                                            <option value="5to" >5º Secundaria</option>
+                                            <option value="6to" >6º Secundaria</option>	
+                                        </select>										
+                                    </div>
+                                    
+                                    <div class="col-md-3 pr-1">
+                                        <label>Paralelo</label>
+                                        <select id="paralelo" class="form-control"name="npar"onchange="myFunction6()">
+                                            <option value="Par_A" >A</option>
+                                            <option value="Par_B" >B</option>
+                                            <option value="Par_C" >C</option>
+                                        </select>										
+                                    </div>      
+							</div>
+						</div>
+                        {{!-- </form> --}}
+								
                             </div>
                             <div class="card-body">
 									<table cellspacing="0" border="0">
-											<colgroup width="26"></colgroup>
-											<colgroup span="2" width="79"></colgroup>
-											<colgroup span="3" width="22"></colgroup>
-											<colgroup width="71"></colgroup>
-											<colgroup span="5" width="22"></colgroup>
-											<colgroup width="71"></colgroup>
-											<colgroup span="5" width="22"></colgroup>
-											<colgroup width="71"></colgroup>
-											<colgroup span="3" width="22"></colgroup>
-											<colgroup span="2" width="71"></colgroup>
-											<colgroup span="2" width="27"></colgroup>
-											<colgroup width="78"></colgroup>
-											<colgroup width="79"></colgroup>
 											<tr>
-												<td height="21" align="left" valign=bottom><font color="#000000"><br></font></td>
+												<td height="10" align="left" valign=bottom><font color="#000000"><br></font></td>
 												<td align="left" valign=bottom><font color="#000000"><br></font></td>
-												<td align="left" valign=bottom><font color="#000000"><br></font></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000" colspan=21 align="center" valign=middle bgcolor="#93CDDD"><b><font color="#000000">EVALUACIÓN MAESTRO (A)</font></b></td>
+												
+												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000" colspan=5 align="center" valign=middle bgcolor="#93CDDD"><b><font color="#000000">EVALUACIÓN MAESTRO</font></b></td>
 												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000" colspan=3 align="center" valign=middle bgcolor="#C3D69B"><b><font color="#000000">AUTOEVALUACIÓN</font></b></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" rowspan=5 align="center" valign=middle bgcolor="#FAC090"><b><font color="#000000"><div class="texto-vertical-2">NOTA BIMESTRAL    (100 PTS)</div></font></b></td>
+												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000;width:54px" rowspan=3 align="center" valign=middle bgcolor="#FAC090"><b><font color="#000000"><div class="texto-vertical-2">NOTA BIM. (100 PTS)</div></font></b></td>
 											</tr>
 											<tr>
-												<td height="21" align="left" valign=bottom><font color="#000000"><br></font></td>
 												<td align="left" valign=bottom><font color="#000000"><br></font></td>
 												<td align="left" valign=bottom><font color="#000000"><br></font></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=3 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">SER</font></b></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" rowspan=4 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000"><div class="texto-vertical-2">PROMEDIO DIMENSIÓN (10 PTS)</div></font></b></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=5 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">SABER</font></b></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" rowspan=4 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000"><div class="texto-vertical-2">PROMEDIO DIMENSIÓN (35 PTS)</div></font></b></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=5 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">HACER</font></b></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" rowspan=4 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000"><div class="texto-vertical-2">PROMEDIO DIMENSIÓN (35 PTS)</div></font></b></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000" colspan=3 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">DECIDIR</font></b></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" rowspan=4 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000"><div class="texto-vertical-2">PROMEDIO DIMENSIÓN (10 PTS)</div></font></b></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" rowspan=4 align="center" valign=middle bgcolor="#93CDDD"><b><font color="#000000"><div class="texto-vertical-2">TOTAL (90 PTS)</div></font></b></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" rowspan=4 align="center" valign=middle bgcolor="#FDEADA"><i><font color="#000000"><div class="texto-vertical-2">SER</div></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" rowspan=4 align="center" valign=middle bgcolor="#FDEADA"><i><font color="#000000"><div class="texto-vertical-2">DECIDIR</div></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" rowspan=4 align="center" valign=middle bgcolor="#C3D69B"><b><font color="#000000"><div class="texto-vertical-2">TOTAL (10 PTS)</div></font></b></td>
-												</tr>
+												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000;width:55px" rowspan=2 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000"><div class="texto-vertical-2">SER (10 PTS)</div></font></b></td>												
+                                                <td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000;width:54px" rowspan=2 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000"><div class="texto-vertical-2">SABER (35 PTS)</div></font></b></td>
+                                                <td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000;width:53px" rowspan=2 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000"><div class="texto-vertical-2">HACER (35 PTS)</div></font></b></td>
+    											<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000;width:55px" rowspan=2 align="center" valign=middle bgcolor="#D99694"><b><font color="#000000"><div class="texto-vertical-2">DECIDIR (10 PTS)</div></font></b></td>
+												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000;width:54px" rowspan=2 align="center" valign=middle bgcolor="#93CDDD"><b><font color="#000000"><div class="texto-vertical-2">TOTAL (90 PTS)</div></font></b></td>
+												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000;width:53px" rowspan=2 align="center" valign=middle bgcolor="#FDEADA"><i><font color="#000000"><div class="texto-vertical-2">SER</div></font></i></td>
+												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000;width:55px" rowspan=2 align="center" valign=middle bgcolor="#FDEADA"><i><font color="#000000"><div class="texto-vertical-2">DECIDIR</div></font></i></td>
+												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000;width:54px" rowspan=2 align="center" valign=middle bgcolor="#C3D69B"><b><font color="#000000"><div class="texto-vertical-2">TOTAL (10 PTS)</div></font></b></td>
+											</tr>
 											<tr>
-												<td height="20" align="left" valign=bottom><font color="#000000"><br></font></td>
-												<td align="left" valign=bottom><font color="#000000"><br></font></td>
-												<td align="left" valign=bottom><font color="#000000"><br></font></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												<td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" rowspan=3 align="center" valign=bottom bgcolor="#FDEADA"><i><font color="#000000"><br></font></i></td>
-												</tr>
+												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000;width:50px" height="26" align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">N° </font></b></td>
+												<td style="border-top: 2px solid #000000;width:250px" align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">NOMBRE COMPLETO </font></b></td>
+											</tr>
+
+									</table>
+                                    <form>
+                                    <table id="lista_curso_nota"> 
 											<tr>
-												<td height="20" align="left" valign=bottom><font color="#000000"><br></font></td>
-												<td align="left" valign=bottom><font color="#000000"><br></font></td>
-												<td align="left" valign=bottom><font color="#000000"><br></font></td>
-												</tr>
-											<tr>
-												<td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" height="26" align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">N° </font></b></td>
-												<td style="border-top: 2px solid #000000" align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">APELLIDOS </font></b></td>
-												<td style="border-top: 2px solid #000000" align="center" valign=middle bgcolor="#D99694"><b><font color="#000000">NOMBRES</font></b></td>
-												</tr>
-											<tr>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" height="35" align="center" valign=middle><font color="#000000"><br>1</font> </td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font>Alvarado Mendoza</td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font>Carla Andrea</td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
-												<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" align="left" valign=bottom><font color="#000000"><br></font><input type="number" step="0.01" style="width:50px"></td>
+												<td class="not"style="width:50px;"align="center">1</td>
+												<td class="not"style="width:250px"align="center">Alvarado Mendoza Carla Andrea</td>
+												<td class="not"><input name="11"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
+												<td class="not"><input name="12"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
+                                                <td class="not"><input name="13"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
+                                                <td class="not"><input name="14"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
+                                                <td class="not"><label id="11"style="width:50px"></label></td>
+                                                <td class="not"><input name="15"onchange="myFunction5()"type="number"style="width:50px" min="0"max="100"required="required"></td>
+                                                <td class="not"><input name="16"onchange="myFunction5()"type="number"style="width:50px" min="0"max="100"required="required"></td>
+                                                <td class="not"><label id="12"style="width:50px"></label></td>
+                                                <td class="not"><label id="13"style="width:50px"></label></td>
 											</tr>
 										</table>
 																						
@@ -227,7 +207,8 @@
 									
                                         <center>		
                                             <input class="btn btn-primary" type="submit" value="Registrar Notas">
-                                            </center>          
+                                        </center>    
+                                        </form>      
 								
 								</div>
                             <div class="card-footer">

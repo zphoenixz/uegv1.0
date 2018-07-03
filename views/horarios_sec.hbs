@@ -16,7 +16,7 @@
     <link href="css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
 </head>
 
-<body class="" onload="cargarmaterias();">
+<body class="" onload="">
     <div class="wrapper ">
         <div class="sidebar" data-color="orange">
             <!--
@@ -63,12 +63,7 @@
                             <p>Horarios</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="/notas_sec">
-                            <i class="now-ui-icons business_badge"></i>
-                            <p>Notas</p>
-                        </a>
-                    </li>
+
   					 <li>
                         <a href="/listas_sec">
                             <i class="now-ui-icons files_paper"></i>
@@ -116,47 +111,34 @@
                             <div class="card-header">
                                 <h4 class="card-title">Registrar Horarios</h4>
                             </div>
-                            <div class="card-body">
+                    <form id="send_schedule">
+                    <div class="card-body">
 						<div class="table-full-width table-responsive">
 								<div class="row">
 										<div class="col-md-3 pr-1">
 											<label>Curso</label>
-											<select id="curso" class="form-control">
-											<option value="01" >1º</option>
-											<option value="02" >2º</option>
-											<option value="03" >3º</option>
-											<option value="04" >4º</option>
-											<option value="05" >5º</option>
-											<option value="06" >6º</option>	</select>										
+											<select id="curso" class="form-control" name="hcur">
+                                                <option value="1ero">1º Secundaria</option>
+                                                <option value="2do" >2º Secundaria</option>
+                                                <option value="3ero">3º Secundaria</option>
+                                                <option value="4to" >4º Secundaria</option>
+                                                <option value="5to" >5º Secundaria</option>
+                                                <option value="6to" >6º Secundaria</option>	
+                                            </select>									
 										</div>
 										
 										<div class="col-md-3 pr-1">
 											<label>Paralelo</label>
-											<select id="paralelo" class="form-control">
-											<option value="01" >A</option>
-											<option value="02" >B</option>
-											<option value="03" >C</option></select>										
+											<select id="paralelo" class="form-control" name="hpar">
+                                                <option value="Par_A" >A</option>
+                                                <option value="Par_B" >B</option>
+                                                <option value="Par_C" >C</option>
+                                            </select>										
 										</div>
 										
 								</div>
                         </div>
-                        <script>
-                                        function cargarmaterias() {
-                                        var array = ["Matemáticas", "Química", "Física", "Biología", "C.Sociales","Ed.Física","Música","Lenguaje"];
-                                            array.sort();
-                                            addOptions("materias", array);}  
-                                         
-                                        function addOptions(domElement, array) {
-                                        var selector = document.getElementsByName(domElement)[0];
-                                        for (materias in array) {
-                                            var opcion = document.createElement("option");
-                                            opcion.text = array[materias];
-                                            // Añadimos un value a los option para hacer mas facil escoger los pueblos
-                                            opcion.value = array[materias].toLowerCase();
-                                            selector.add(opcion);
-                                        }   
-                                    }                                                          
-                        </script>
+
 
 						<div class="card-body">
                           <table class="table">
@@ -172,100 +154,377 @@
                                 <tr>
 									<th>08:00 - 08:45</th>
 								<td class="text-left"> 			
-
-                                <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                <option value="" > </option></select>										
-                                
+                                    <select name= "lu_0800" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										
                                 </td>
                                 <td class="text-left"> 		
-                                            <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>										
+                                     <select name= "ma_0800" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										
                                
 								</td>
 								<td class="text-left">
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>										
+                                     <select name= "mi_0800" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>											
                                  </td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>										
+                                     <select name= "ju_0800" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										
                                 </td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>										
+                                     <select name= "vi_0800" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>											
                                  </td>								
                                 </tr>
 								
 								<tr>
 									<th>08:45 - 09:30</th>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>										
-                                   
+                                     <select name= "lu_0845" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>										
+                                     <select name= "ma_0845" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										
                                  </td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                             <option value="" > </option></select>										
+                                     <select name= "mi_0845" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										
                                 </td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>										                   
+                                     <select name= "ju_0845" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										                   
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                              <option value="" > </option></select>										
+                                     <select name= "vi_0845" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										
                                 </td>								
                                 </tr>
 								
 								<tr>
 									<th>09:30 - 10:15</th>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>										                   
+                                     <select name= "lu_0930" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>										                   
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>	
+                                    <select name= "ma_0930" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "mi_0930" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "ju_0930" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "vi_0930" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>								
                                 </tr>
 								
 								<tr>
 									<th>10:15 - 11:00</th>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "lu_1015" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "ma_1015" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "mi_1015" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>								
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "ju_1015" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "vi_1015" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>								
                                 </tr>
 								
@@ -281,96 +540,376 @@
 								<tr>
 									<th>11:30 - 12:15</th>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>
+                                    <select name= "lu_1130" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>	
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>		
+                                    <select name= "ma_1130" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>			
         						</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>	
+                                    <select name= "mi_1130" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>	
         						</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>	
+                                    <select name= "ju_1130" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>	
     							</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "vi_1130" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>								
                                 </tr>
 								
 								<tr>
 									<th>12:15 - 13:00</th>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "lu_1215" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "ma_1215" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "mi_1215" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>					
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "ju_1215" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>					
 								</td>
 								<td class="text-left">
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "vi_1215" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>					
 								</td>								
                                 </tr>
 								
 								<tr>
 									<th>13:00 - 13:35</th>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "lu_1300" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "ma_1300" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>							
+                                    <select name= "mi_1300" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "ju_1300" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left">
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "vi_1300" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>								
                                 </tr>
 
 								<tr>
 									<th>13:35 - 14:10</th>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "lu_1335" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "ma_1335" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>							
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>						
+                                    <select name= "mi_1335" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>					
+                                    <select name= "ju_1335" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>
 								<td class="text-left"> 
-                                        <select name= "materias" id="materias" class="form-control"  onchange="cargarmaterias();">
-                                                <option value="" > </option></select>					
+                                    <select name= "vi_1335" id="materia" class="form-control">
+                                        <option value="Libre">Libre</option>
+                                        <option value="Matematicas">Matematicas</option>
+                                        <option value="Fisica">Física</option>
+                                        <option value="Biologia">Biología</option>
+                                        <option value="Geografia">Geografía</option>
+                                        <option value="Literatura">Literatura</option>
+                                        <option value="Artes_Plasticas">Artes Plasticas</option>
+                                        <option value="Musica">Música</option>
+                                        <option value="Educ_Fisica">Educ. Física</option>
+                                        <option value="Quimica">Quimica</option>
+                                        <option value="Filosofia">Filosofia</option>
+                                        <option value="Civica">Civica</option>
+                                        <option value="Psicologia">Psicologia</option>
+                                        <option value="Ingles">Ingles</option>
+                                    </select>						
 								</td>								
                                 </tr>		
                               
@@ -378,12 +917,12 @@
                           </table>
                         </div>
                         <center>		
-                                <input class="btn btn-primary" type="submit" value="Registrar">
-                                <input class="btn btn-primary" type="submit" value="Eliminar">
-								</center>
-								</div>
+                             <input class="btn btn-primary" type="submit" value="Guardar" id="guardar_sche" >
+						</center>
+						</div>
+                        </form>
                             <div class="card-footer">
-                                <div class="stats">
+                            <div class="stats">
                                 </div>
                             </div>
                         </div>

@@ -27,8 +27,9 @@ app.set('View engine', 'hbs');//HTML mustache Handlebar
 //------------------------------------
 var op = 'nada';//nadie esta conectado
 var usernameN = 'sin_nombre';//nadie esta conectado
+var materiaP = 'nomateria';
 var SesionActual = 'Iniciar Sesión';
-var newStudent, newDad, newPer, newEnt ;
+var newStudent, newDad, newPer, newEnt, newHor ;
 var e_ci, p_ci, per_ci, newCom;
 
 io.on('connection', (socket) => {
@@ -47,11 +48,14 @@ io.on('connection', (socket) => {
                     op = validarUsuario(results1, params.user, params.pass);
                     usernameN = params.user;
                     console.log("La opcion == "+op);
-                    if(op == 'profesor'){
-                        SesionActual = usernameN + " Cerrar Sesión";
+                    if(op != 'Ninguna' && op!='nada'){
+                        materiaP=op;
+                        op='profesor';
+                        SesionActual = materiaP+": "+usernameN + " Cerrar Sesión";
                         callback('Bienvenido Profesor!','p');
-                    }else if(op == 'secretario'){
+                    }else if(op == 'Ninguna'){//ninguna materia osea administrativo
                         SesionActual = usernameN + " Cerrar Sesión";
+                        op = 'secretario';
                         callback('Bienvenido Administrativo!','s');
                     }else{
                         callback('C.I. y/o Contraseña incorrectos!');
@@ -113,6 +117,19 @@ io.on('connection', (socket) => {
             }
         });
     });
+    //----------------------------------------------------------------------------------LOAD LIST HORARIOS
+        socket.on('load_holist', (params, callback) => {
+            var curso = params.curso;
+            var paralelo = params.paralelo
+    
+            FBQueries.existsData("Horarios/"+curso, paralelo, results1 => {
+                if(results1 == "0"){
+                    callback('nada','nada');
+                }else{ 
+                    callback(results1,'lista');
+                }
+            });
+        });
     //----------------------------------------------------------------------------------SEARCH USER
     socket.on('buscar_usuario', (params, callback) => {
         FBQueries.existsData("Padres", params.ci, results1 => {
@@ -348,7 +365,25 @@ io.on('connection', (socket) => {
         });
         callback("Se guardo comunicados");
     });
+    //------------------------------------------------------------------------------------ GUARDAR HORARIOS
+    socket.on('save_sche', (params, callback) => {
+        newHor = {
+            lunes: params.lunes,
+            martes: params.martes,
+            miercoles: params.miercoles,
+            jueves: params.jueves,
+            viernes: params.viernes,
+        };
+        //----
+        // var obj = `{"${e_ci}" : "${newStudent.paterno +" "+ newStudent.materno +" "+newStudent.nombre}"}`;
+        // obj = JSON.parse(obj);
+        FBQueries.pushData("Horarios/"+params.cur, params.par, newHor, resultados => {
+            console.log("Se guardo Horario");
+        });
+        callback("Se guardo Horario");
+    });
 });
+
 
 
 //------------------------------------------------------------------------------
@@ -550,16 +585,16 @@ app.get('/horarios_sec', (req, res) => {
             mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
         });
 });
-app.get('/notas_sec', (req, res) => {
-    if(op == 'secretario')
-        res.render('notas_sec.hbs', {
-            logout: SesionActual
-        });
-    else
-        res.render('restringido.hbs', {
-            mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
-        });
-});
+// app.get('/notas_sec', (req, res) => {
+//     if(op == 'secretario')
+//         res.render('notas_sec.hbs', {
+//             logout: SesionActual
+//         });
+//     else
+//         res.render('restringido.hbs', {
+//             mensaje_restringido: 'Necesitas una clave de Administrativo para acceder a esta pagina :('
+//         });
+// });
 app.get('/listas_sec', (req, res) => {
     if(op == 'secretario')
         res.render('listas_sec.hbs', {
