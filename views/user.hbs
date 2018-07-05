@@ -109,19 +109,19 @@
                                 <h5 class="title">Consulta Libreta Electrónica</h5>
                             </div>
                             <div class="card-body">
-                                <form action="/notas">
+                                <form  id="require_nota">
                                             <div class="form-group">
 											 <label>Rude o C.I. de la/el Estudiante</label>
-                                                <input type="number" class="form-control" placeholder="Rude o C.I. de la/el Estudiante" >
+                                                <input name="est_ci"type="number" class="form-control" placeholder="Rude o C.I. de la/el Estudiante" required="required">
                                             </div>
                                         
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Fecha de Nacimiento</label>
-                                                <input  type="date" class="form-control" placeholder="Fecha de Nacimiento">
+                                                <input name="fec_ci"type="date" class="form-control" placeholder="Fecha de Nacimiento" required="required">
                                             </div>
 							<div class="form-group">
 								<center>		
-								<input class="btn btn-primary" type="submit" value="Aceptar">
+								<input class="btn btn-primary" type="submit" value="Buscar" id="buscar_nota">
 								</center>
                             </div>
                                 </form>

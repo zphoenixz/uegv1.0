@@ -259,39 +259,42 @@ var labels = [];
 var p1s = [];
 var p2s = [];
 var p3s = [];
+
 function myFunction5() {
     console.log("entre!!!!");
-
+    // var key;
     for(var i=1;i<=cantidad_alumnos;i++){
         ns[(i-1)] = [];
         labels[(i-1)] = [];
         for(var j=1;j<=6;j++){
             ns[(i-1)][(j-1)] = jQuery(`[name=${i}${j}]`).val();
-            if(j<=3)
-                labels[(i-1)][(j-1)] = jQuery(`#${i}${j}`);
+            if(j<=3){
+                labels[(i-1)][(j-1)] = jQuery(`#${i}${i}${j}`);
+            }
         }
         
     }
     for(var i=1;i<=cantidad_alumnos;i++){
         p1s[(i-1)] = Math.round((ns[(i-1)][0]*0.1+ns[(i-1)][1]*0.35+ns[(i-1)][2]*0.35+ns[(i-1)][3]*0.1)*100)/100;
         p2s[(i-1)] = Math.round((ns[(i-1)][4]*0.05+ns[(i-1)][5]*0.05)*100)/100;
-        p3s[(i-1)] = Math.round((p1s[(i-1)] + p2s[(i-1)])*100)/100;
     }
     for(var i=1;i<=cantidad_alumnos;i++){
-        for(var j=1;j<=3;j++){
-            labels[(i-1)][(j-1)].css("font-weight","bold").text(p1s[(i-1)].toString()); 
-            labels[(i-1)][(j-1)].css("font-weight","bold").text(p2s[(i-1)].toString()); 
-            labels[(i-1)][(j-1)].css("font-weight","bold").text(p3s[(i-1)].toString()); 
-        }
-        
+        p3s[(i-1)] = Math.round((p1s[(i-1)] + p2s[(i-1)])*100)/100;
+    }
+    // console.log("Notas: ps1:"+ p1s[0]+", ps2: "+p2s[0]+", ps3: "+p3s[0]);
+    for(var i=1;i<=cantidad_alumnos;i++){
+        labels[(i-1)][0].css("font-weight","bold").text(p1s[(i-1)].toString()); 
+        labels[(i-1)][1].css("font-weight","bold").text(p2s[(i-1)].toString()); 
+        labels[(i-1)][2].css("font-weight","bold").text(p3s[(i-1)].toString()); 
     }
 }
+var carnets = [];
 var cantidad_alumnos;//<---------------------------------------------------------------------CANTIDAD DE ALUMNOS
 function myFunction6() {
     jQuery('#lista_curso_nota').empty();
     var ncur = jQuery('[name=ncur]');
     var npar = jQuery('[name=npar]');
-    var list = jQuery('#lista_curso_nota');
+    var list11 = jQuery('#lista_curso_nota');
     socket.emit('load_list', {
         curso: ncur.val(),
         paralelo: npar.val()
@@ -299,7 +302,16 @@ function myFunction6() {
         if(tipo == "lista"){
             var nombre_completo = (Object.values(msj)).sort();
             cantidad_alumnos = 0;
+            //----------------------------------------------
+            var key;var i=0;
+            for(key in msj){
+                if(msj.hasOwnProperty(key)){
+                    carnets[i] = msj[key]+"/"+key; i++;
+                    //console.log(key + " = " +msj[key]);
+                }
+            }
 
+            //----------------------------------------------
             nombre_completo.forEach(function(element) {
                 cantidad_alumnos++;
                 var arr = element.split(" ");
@@ -307,18 +319,18 @@ function myFunction6() {
                 var materno = arr[1];
                 var nombres = arr[2];
 
-                list.append(`<tr>
+                list11.append(`<tr>
                 <td class="not"style="width:50px;"align="center">${cantidad_alumnos}</td>
                 <td class="not"style="width:250px"align="center">${paterno+" "+materno+" "+nombres}</td>
                 <td class="not"><input name="${cantidad_alumnos}1"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
                 <td class="not"><input name="${cantidad_alumnos}2"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
                 <td class="not"><input name="${cantidad_alumnos}3"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
                 <td class="not"><input name="${cantidad_alumnos}4"onchange="myFunction5()"type="number"style="width:50px"min="0"max="100"required="required"></td>
-                <td class="not"><label id="${cantidad_alumnos}1"style="width:50px"></label></td>
+                <td class="not"><label id="${cantidad_alumnos}${cantidad_alumnos}1"style="width:50px"></label></td>
                 <td class="not"><input name="${cantidad_alumnos}5"onchange="myFunction5()"type="number"style="width:50px" min="0"max="100"required="required"></td>
                 <td class="not"><input name="${cantidad_alumnos}6"onchange="myFunction5()"type="number"style="width:50px" min="0"max="100"required="required"></td>
-                <td class="not"><label id="${cantidad_alumnos}2"style="width:50px"></label></td>
-                <td class="not"><label id="${cantidad_alumnos}3"style="width:50px"></label></td>
+                <td class="not"><label id="${cantidad_alumnos}${cantidad_alumnos}2"style="width:50px"></label></td>
+                <td class="not"><label id="${cantidad_alumnos}${cantidad_alumnos}3"style="width:50px"></label></td>
                 </tr>`);
             });
         }else{
@@ -326,7 +338,74 @@ function myFunction6() {
         }
     });
 }
-    
+//================================================================================================ NOTAS
+//-------------------------------------------------- INGRESAR A VER MIS NOTAS
+jQuery('#require_nota').on('submit', function(e){
+    e.preventDefault();
+    var BotonGuardar = jQuery('#buscar_nota');
+    BotonGuardar.attr('disabled', 'disabled').prop('value', 'Buscando....'); 
+
+    var buscado = jQuery('[name=est_ci]').val();
+    var fech = jQuery('[name=fec_ci]').val();
+
+    socket.emit('buscar_usuario', {
+        ci: buscado
+    }, function (inf,tipo) {
+        if(tipo == 'estudiante'){
+            // var ecpp = jQuery('[name=ecpp]').prop('value', inf.ci_padre).css({ 'color': 'green', 'font-size': '120%' });
+            // var eap = jQuery('[name=eap]').prop('value', inf.paterno).css({ 'color': 'green', 'font-size': '120%' });
+            // var eam = jQuery('[name=eam]').prop('value', inf.materno).css({ 'color': 'green', 'font-size': '120%' });
+            // var en = jQuery('[name=en]').prop('value', inf.nombre).css({ 'color': 'green', 'font-size': '120%' });
+            // var eci = jQuery('[name=eci]').prop('value', buscado).css({ 'color': 'green', 'font-size': '120%' });
+            // var edep1 = jQuery('[name=edep1]').prop('value', inf.ci_ext).css({ 'color': 'green', 'font-size': '120%', 'height': '120%'});
+            // var efn = jQuery('[name=efn]').prop('value', inf.fech_nac).css({ 'color': 'green', 'font-size': '120%' });
+            // var esex = jQuery('[name=esex]').prop('value', inf.sexo).css({ 'color': 'green', 'font-size': '120%', 'height': '120%'});
+            // var ep = jQuery('[name=ep]').prop('value', inf.pais_nac).css({ 'color': 'green', 'font-size': '120%' });
+            // var edep2 = jQuery('[name=edep2]').prop('value', inf.dpto_nac).css({ 'color': 'green', 'font-size': '120%','height': '120%' });
+            // var eprov = jQuery('[name=eprov]').prop('value', inf.prov_nac).css({ 'color': 'green', 'font-size': '120%' });
+            // var eloc = jQuery('[name=eloc]').prop('value', inf.loca_nac).css({ 'color': 'green', 'font-size': '120%' });
+            // var ecur = jQuery('[name=ecur]').prop('value', inf.curso).css({ 'color': 'green', 'font-size': '120%' });
+            // var epar = jQuery('[name=epar]').prop('value', inf.paralelo).css({ 'color': 'green', 'font-size': '120%' });
+            console.log(inf.Bimestres);
+            // document.getElementById("student_tittle").scrollIntoView({ behavior: 'smooth'});
+        }else{
+            alert("El estudiante que busca no existe :(");
+        }
+        BotonGuardar.removeAttr('disabled').prop('value', 'Buscar'); 
+    });
+
+});
+//------------------------------------------------------------------------ ENVIAR DATOS NOTAS
+jQuery('#send_grades').on('submit', function(e){
+    e.preventDefault();
+    var BotonGuardar = jQuery('#enviar_notas');
+    BotonGuardar.attr('disabled', 'disabled').prop('value', 'Enviando Notas .......'); 
+    var bimestre = jQuery('[name=nbim]').val();
+    //-----------------------------------------------------------------------------Ordenar CARNETS
+    for(var i=0;i<cantidad_alumnos;i++){
+        console.log("Carnet1 #"+(i+1)+": "+carnets[i]);
+    }
+    carnets.sort();
+    var aux1 = [];
+    for(var i=0;i<cantidad_alumnos;i++){
+        aux1[i] = (carnets[i]).split("/");
+        carnets[i] = aux1[i][1];
+        console.log("Carnet2 #"+(i+1)+": "+carnets[i]);
+    }
+
+    for(var i=0;i<cantidad_alumnos;i++){
+        var notas = p1s[i]+"/"+p2s[i]+"/"+p3s[i];
+        var c = carnets[i];
+        console.log("Estoy guardando "+c+", del bimestre: "+bimestre);
+        socket.emit('save_est2', {
+            ci: c,
+            not: notas,
+            bim: bimestre
+        }, function () {
+        });
+    }
+    BotonGuardar.removeAttr('disabled').prop('value', 'Registrar Notas'); 
+});
 //-------------------------------------------------- ENVIAR DATOS ENTREVISTA
 jQuery('#send_ent').on('submit', function(e){
     e.preventDefault();
@@ -389,17 +468,6 @@ jQuery('#get_list').on('submit', function(e){
     }, function (msj,tipo) {
         if(tipo == "lista"){
             console.log("La lista extraida!!!");
-
-            //----------------------------------------------
-            var key;
-            for(key in msj){
-                if(msj.hasOwnProperty(key)){
-                    console.log(key + " = " +msj[key]);
-                }
-            }
-            //----------------------------------------------
-            
-
             var nombre_completo = (Object.values(msj)).sort();
             var nro = 0;
 

@@ -277,6 +277,19 @@ io.on('connection', (socket) => {
             }
         });
     });
+    //-------------------------------------------------------------------------------------GUARDAR NOTAS DEL ESTUDIANTE
+    socket.on('save_est2', (params, callback) => {
+        // var ci_est_notas = params.ci;
+        newGrades = { // 
+            nota: params.not
+        };
+        //----
+        // console.log("Estoy guardando "+params.ci+", del bimestre: "+params.bim+", de materia: "+materiaP);
+        FBQueries.pushData("Estudiantes/"+params.ci+"/Bimestres/"+params.bim, materiaP, newGrades, resultados => {
+            console.log("Se guardaron notas de "+params.ci);
+        });
+        callback();
+    });
     //------------------------------------------------------------------------------------ GUARDAR APODERADO
     socket.on('save_dad', (params, callback) => {
         p_ci = params.pci;
