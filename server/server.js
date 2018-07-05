@@ -29,7 +29,7 @@ var op = 'nada';//nadie esta conectado
 var usernameN = 'sin_nombre';//nadie esta conectado
 var materiaP = 'nomateria';
 var SesionActual = 'Iniciar Sesión';
-var newStudent, newDad, newPer, newEnt, newHor ;
+var newStudent, newDad, newPer, newEnt, newHor, newRecNot ;
 var e_ci, p_ci, per_ci, newCom;
 
 io.on('connection', (socket) => {
@@ -175,6 +175,78 @@ io.on('connection', (socket) => {
             
             callback();
         });
+    //---------------------------------------------------------------------------------Guardar Notas
+    // var mat, fis, bio, geo, lit, art, mus, edu, qui, fil, civ, psi, ing;
+    // var nombre_nota, pat_nota, mat_nota, fec_nota;
+
+    socket.on('guardar_notas', (params, callback) => {
+        newRecNot = {
+            nombre_nota: params.nom,
+            pat_nota: params.pat,
+            mat_nota: params.mat,
+            fec_nota: params.fec,
+            mat1: params.mat1,
+            fis1: params.fis1,
+            bio1: params.bio1,
+            geo1: params.geo1,
+            lit1: params.lit1,
+            art1: params.art1,
+            mus1: params.mus1,
+            edu1: params.edu1,
+            qui1: params.qui1,
+            fil1: params.fil1,
+            civ1: params.civ1,
+            psi1: params.psi1,
+            ing1: params.ing1,
+            mat2: params.mat2,
+            fis2: params.fis2,
+            bio2: params.bio2,
+            geo2: params.geo2,
+            lit2: params.lit2,
+            art2: params.art2,
+            mus2: params.mus2,
+            edu2: params.edu2,
+            qui2: params.qui2,
+            fil2: params.fil2,
+            civ2: params.civ2,
+            psi2: params.psi2,
+            ing2: params.ing2,
+            mat3: params.mat3,
+            fis3: params.fis3,
+            bio3: params.bio3,
+            geo3: params.geo3,
+            lit3: params.lit3,
+            art3: params.art3,
+            mus3: params.mus3,
+            edu3: params.edu3,
+            qui3: params.qui3,
+            fil3: params.fil3,
+            civ3: params.civ3,
+            psi3: params.psi3,
+            ing3: params.ing3,
+
+            mat4: params.mat4,
+            fis4: params.fis4,
+            bio4: params.bio4,
+            geo4: params.geo4,
+            lit4: params.lit4,
+            art4: params.art4,
+            mus4: params.mus4,
+            edu4: params.edu4,
+            qui4: params.qui4,
+            fil4: params.fil4,
+            civ4: params.civ4,
+            psi4: params.psi4,
+            ing4: params.ing4
+        };
+
+
+        callback();
+    });
+    socket.on('recuperar_notas', (params, callback) => {
+
+        callback(newRecNot);
+    });
     //----------------------------------------------------------------------------------UPDATE ESTUDIANTE
     socket.on('update_est', (params, callback) => {
         console.log("----------------- Empezando updates sobre el estudiante");

@@ -310,7 +310,6 @@ function myFunction6() {
                     //console.log(key + " = " +msj[key]);
                 }
             }
-
             //----------------------------------------------
             nombre_completo.forEach(function(element) {
                 cantidad_alumnos++;
@@ -338,8 +337,57 @@ function myFunction6() {
         }
     });
 }
+
+function myFunction7() {
+    var input_nombre = jQuery('#nom_nota');
+    var input_apellidos = jQuery('#ap_nota');
+    var input_fecha = jQuery('#fe_nota');
+
+    var lista_notas = jQuery('#promedios');
+    jQuery('#promedios').empty();
+    socket.emit('recuperar_notas', {
+ 
+    }, function (res) {
+        input_nombre.attr('disabled', 'disabled').prop('value', `${res.nombre_nota}`).css({ 'color': 'green', 'font-size': '120%' }); 
+        input_apellidos.attr('disabled', 'disabled').prop('value', `${res.pat_nota+" "+res.mat_nota}`).css({ 'color': 'green', 'font-size': '120%' }); 
+        input_fecha.attr('disabled', 'disabled').prop('value', `${res.fec_nota}`).css({ 'color': 'green', 'font-size': '120%' }); 
+// var mat, fis, bio, geo, lit, art, mus, edu, qui, fil, civ, psi, ing;
+        var pmat = (Math.round((Number(res.mat1)+Number(res.mat2)+Number(res.mat3)+Number(res.mat4))/4)*100/100).toString();
+        var pfis = (Math.round((Number(res.fis1)+Number(res.fis2)+Number(res.fis3)+Number(res.fis4))/4)*100/100).toString();
+        var pbio = (Math.round((Number(res.bio1)+Number(res.bio2)+Number(res.bio3)+Number(res.bio4))/4)*100/100).toString();
+        var pgeo = (Math.round((Number(res.geo1)+Number(res.geo2)+Number(res.geo3)+Number(res.geo4))/4)*100/100).toString();
+        var plit = (Math.round((Number(res.lit1)+Number(res.lit2)+Number(res.lit3)+Number(res.lit4))/4)*100/100).toString();
+        var part = (Math.round((Number(res.art1)+Number(res.art2)+Number(res.art3)+Number(res.art4))/4)*100/100).toString();
+        var pmus = (Math.round((Number(res.mus1)+Number(res.mus2)+Number(res.mus3)+Number(res.mus4))/4)*100/100).toString();
+        var pedu = (Math.round((Number(res.edu1)+Number(res.edu2)+Number(res.edu3)+Number(res.edu4))/4)*100/100).toString();
+        var pqui = (Math.round((Number(res.qui1)+Number(res.qui2)+Number(res.qui3)+Number(res.qui4))/4)*100/100).toString();
+        var pfil = (Math.round((Number(res.fil1)+Number(res.fil2)+Number(res.fil3)+Number(res.fil4))/4)*100/100).toString();
+        var pciv = (Math.round((Number(res.civ1)+Number(res.civ2)+Number(res.civ3)+Number(res.civ4))/4)*100/100).toString();
+        var ppsi = (Math.round((Number(res.psi1)+Number(res.psi2)+Number(res.psi3)+Number(res.psi4))/4)*100/100).toString();
+        var ping = (Math.round((Number(res.ing1)+Number(res.ing2)+Number(res.ing3)+Number(res.ing4))/4)*100/100).toString();
+
+        lista_notas.append(`<tr><td>Matemáticas     </td><td>${res.mat1}</td><td>${res.mat2}</td><td>${res.mat3}</td><td>${res.mat4}</td><td>${pmat}</td></tr>`);
+        lista_notas.append(`<tr><td>Física          </td><td>${res.fis1}</td><td>${res.fis2}</td><td>${res.fis3}</td><td>${res.fis4}</td><td>${pfis}</td></tr>`);
+        lista_notas.append(`<tr><td>Biología        </td><td>${res.bio1}</td><td>${res.bio2}</td><td>${res.bio3}</td><td>${res.bio4}</td><td>${pbio}</td></tr>`);
+        lista_notas.append(`<tr><td>Geografía       </td><td>${res.geo1}</td><td>${res.geo2}</td><td>${res.geo3}</td><td>${res.geo4}</td><td>${pgeo}</td></tr>`);
+        lista_notas.append(`<tr><td>Literatura      </td><td>${res.lit1}</td><td>${res.lit2}</td><td>${res.lit3}</td><td>${res.lit4}</td><td>${plit}</td></tr>`);
+        lista_notas.append(`<tr><td>Artes Plasticas </td><td>${res.art1}</td><td>${res.art2}</td><td>${res.art3}</td><td>${res.art4}</td><td>${part}</td></tr>`);
+        lista_notas.append(`<tr><td>Música          </td><td>${res.mus1}</td><td>${res.mus2}</td><td>${res.mus3}</td><td>${res.mus4}</td><td>${pmus}</td></tr>`);
+        lista_notas.append(`<tr><td>Educacion Física</td><td>${res.edu1}</td><td>${res.edu2}</td><td>${res.edu3}</td><td>${res.edu4}</td><td>${pedu}</td></tr>`);
+        lista_notas.append(`<tr><td>Química         </td><td>${res.qui1}</td><td>${res.qui2}</td><td>${res.qui3}</td><td>${res.qui4}</td><td>${pqui}</td></tr>`);
+        lista_notas.append(`<tr><td>Filosofia       </td><td>${res.fil1}</td><td>${res.fil2}</td><td>${res.fil3}</td><td>${res.fil4}</td><td>${pfil}</td></tr>`);
+        lista_notas.append(`<tr><td>Cívica          </td><td>${res.civ1}</td><td>${res.civ2}</td><td>${res.civ3}</td><td>${res.civ4}</td><td>${pciv}</td></tr>`);
+        lista_notas.append(`<tr><td>Psicologia      </td><td>${res.psi1}</td><td>${res.psi2}</td><td>${res.psi3}</td><td>${res.psi4}</td><td>${ppsi}</td></tr>`);
+        lista_notas.append(`<tr><td>Ingles          </td><td>${res.ing1}</td><td>${res.ing2}</td><td>${res.ing3}</td><td>${res.ing4}</td><td>${ping}</td></tr>`);
+    });
+
+    // mat, fis, bio, geo, lit, art, mus, edu, qui, fil, civ, psi, ing;
+
+}
 //================================================================================================ NOTAS
 //-------------------------------------------------- INGRESAR A VER MIS NOTAS
+
+
 jQuery('#require_nota').on('submit', function(e){
     e.preventDefault();
     var BotonGuardar = jQuery('#buscar_nota');
@@ -347,29 +395,157 @@ jQuery('#require_nota').on('submit', function(e){
 
     var buscado = jQuery('[name=est_ci]').val();
     var fech = jQuery('[name=fec_ci]').val();
-
     socket.emit('buscar_usuario', {
         ci: buscado
     }, function (inf,tipo) {
         if(tipo == 'estudiante'){
-            // var ecpp = jQuery('[name=ecpp]').prop('value', inf.ci_padre).css({ 'color': 'green', 'font-size': '120%' });
-            // var eap = jQuery('[name=eap]').prop('value', inf.paterno).css({ 'color': 'green', 'font-size': '120%' });
-            // var eam = jQuery('[name=eam]').prop('value', inf.materno).css({ 'color': 'green', 'font-size': '120%' });
-            // var en = jQuery('[name=en]').prop('value', inf.nombre).css({ 'color': 'green', 'font-size': '120%' });
-            // var eci = jQuery('[name=eci]').prop('value', buscado).css({ 'color': 'green', 'font-size': '120%' });
-            // var edep1 = jQuery('[name=edep1]').prop('value', inf.ci_ext).css({ 'color': 'green', 'font-size': '120%', 'height': '120%'});
-            // var efn = jQuery('[name=efn]').prop('value', inf.fech_nac).css({ 'color': 'green', 'font-size': '120%' });
-            // var esex = jQuery('[name=esex]').prop('value', inf.sexo).css({ 'color': 'green', 'font-size': '120%', 'height': '120%'});
-            // var ep = jQuery('[name=ep]').prop('value', inf.pais_nac).css({ 'color': 'green', 'font-size': '120%' });
-            // var edep2 = jQuery('[name=edep2]').prop('value', inf.dpto_nac).css({ 'color': 'green', 'font-size': '120%','height': '120%' });
-            // var eprov = jQuery('[name=eprov]').prop('value', inf.prov_nac).css({ 'color': 'green', 'font-size': '120%' });
-            // var eloc = jQuery('[name=eloc]').prop('value', inf.loca_nac).css({ 'color': 'green', 'font-size': '120%' });
-            // var ecur = jQuery('[name=ecur]').prop('value', inf.curso).css({ 'color': 'green', 'font-size': '120%' });
-            // var epar = jQuery('[name=epar]').prop('value', inf.paralelo).css({ 'color': 'green', 'font-size': '120%' });
-            console.log(inf.Bimestres);
-            // document.getElementById("student_tittle").scrollIntoView({ behavior: 'smooth'});
+            if(fech == inf.fech_nac){
+                // nombre_nota = inf.nombre;
+                // pat_nota = inf.paterno;
+                // mat_nota = inf.materno;
+                // fec_nota = inf.fech_nac;
+
+                var todosLosDatos = (Object.values(inf.Bimestres)).sort();
+                //PRIMER BIMESTRE------------------------------------------------------
+                var mat1 = (todosLosDatos[0].Matematicas.nota).split("/")[2];
+                var fis1 = (todosLosDatos[0].Fisica.nota).split("/")[2];
+                var bio1 = (todosLosDatos[0].Biologia.nota).split("/")[2];
+                var geo1 = (todosLosDatos[0].Geografia.nota).split("/")[2];
+
+                var lit1 = (todosLosDatos[0].Literatura.nota).split("/")[2];
+                var art1 = (todosLosDatos[0].Artes_Plasticas.nota).split("/")[2];
+                var mus1 = (todosLosDatos[0].Musica.nota).split("/")[2];
+                var edu1 = (todosLosDatos[0].Educ_Fisica.nota).split("/")[2];
+
+                var qui1 = (todosLosDatos[0].Quimica.nota).split("/")[2];
+                var fil1 = (todosLosDatos[0].Filosofia.nota).split("/")[2];
+                var civ1 = (todosLosDatos[0].Civica.nota).split("/")[2];
+                var psi1 = (todosLosDatos[0].Psicologia.nota).split("/")[2];
+                var ing1 = (todosLosDatos[0].Ingles.nota).split("/")[2];
+                 //SEGUNDO BIMESTRE------------------------------------------------------
+                var mat2 = (todosLosDatos[1].Matematicas.nota).split("/")[2];
+                var fis2 = (todosLosDatos[1].Fisica.nota).split("/")[2];
+                var bio2 = (todosLosDatos[1].Biologia.nota).split("/")[2];
+                var geo2 = (todosLosDatos[1].Geografia.nota).split("/")[2];
+ 
+                var lit2 = (todosLosDatos[1].Literatura.nota).split("/")[2];
+                var art2 = (todosLosDatos[1].Artes_Plasticas.nota).split("/")[2];
+                var mus2 = (todosLosDatos[1].Musica.nota).split("/")[2];
+                var edu2 = (todosLosDatos[1].Educ_Fisica.nota).split("/")[2];
+ 
+                var qui2 = (todosLosDatos[1].Quimica.nota).split("/")[2];
+                var fil2 = (todosLosDatos[1].Filosofia.nota).split("/")[2];
+                var civ2 = (todosLosDatos[1].Civica.nota).split("/")[2];
+                var psi2 = (todosLosDatos[1].Psicologia.nota).split("/")[2];
+                var ing2 = (todosLosDatos[1].Ingles.nota).split("/")[2];
+                //TERCER BIMESTRE------------------------------------------------------
+                var mat3 = (todosLosDatos[2].Matematicas.nota).split("/")[2];
+                var fis3 = (todosLosDatos[2].Fisica.nota).split("/")[2];
+                var bio3 = (todosLosDatos[2].Biologia.nota).split("/")[2];
+                var geo3 = (todosLosDatos[2].Geografia.nota).split("/")[2];
+
+                var lit3 = (todosLosDatos[2].Literatura.nota).split("/")[2];
+                var art3 = (todosLosDatos[2].Artes_Plasticas.nota).split("/")[2];
+                var mus3 = (todosLosDatos[2].Musica.nota).split("/")[2];
+                var edu3 = (todosLosDatos[2].Educ_Fisica.nota).split("/")[2];
+
+                var qui3 = (todosLosDatos[2].Quimica.nota).split("/")[2];
+                var fil3 = (todosLosDatos[2].Filosofia.nota).split("/")[2];
+                var civ3 = (todosLosDatos[2].Civica.nota).split("/")[2];
+                var psi3 = (todosLosDatos[2].Psicologia.nota).split("/")[2];
+                var ing3 = (todosLosDatos[2].Ingles.nota).split("/")[2];
+                 //CUARTO BIMESTRE------------------------------------------------------
+                 var mat4 = (todosLosDatos[3].Matematicas.nota).split("/")[2];
+                 var fis4 = (todosLosDatos[3].Fisica.nota).split("/")[2];
+                 var bio4 = (todosLosDatos[3].Biologia.nota).split("/")[2];
+                 var geo4 = (todosLosDatos[3].Geografia.nota).split("/")[2];
+ 
+                 var lit4 = (todosLosDatos[3].Literatura.nota).split("/")[2];
+                 var art4 = (todosLosDatos[3].Artes_Plasticas.nota).split("/")[2];
+                 var mus4 = (todosLosDatos[3].Musica.nota).split("/")[2];
+                 var edu4 = (todosLosDatos[3].Educ_Fisica.nota).split("/")[2];
+
+                 var qui4 = (todosLosDatos[3].Quimica.nota).split("/")[2];
+                 var fil4 = (todosLosDatos[3].Filosofia.nota).split("/")[2];
+                 var civ4 = (todosLosDatos[3].Civica.nota).split("/")[2];
+                 var psi4 = (todosLosDatos[3].Psicologia.nota).split("/")[2];
+                 var ing4 = (todosLosDatos[3].Ingles.nota).split("/")[2];
+                // console.log("bimestrees   " + todosLosDatos[0].Ingles.nota);
+                // console.log("bimestrees   " + (todosLosDatos[0].Ingles.nota).split("/")[2]);
+                socket.emit('guardar_notas', {
+                    nom: inf.nombre,
+                    pat: inf.paterno,
+                    mat: inf.materno,
+                    fec: inf.fech_nac,
+
+                    mat1: mat1,
+                    fis1: fis1,
+                    bio1: bio1,
+                    geo1: geo1,
+                    lit1: lit1,
+                    art1: art1,
+                    mus1: mus1,
+                    edu1: edu1,
+                    qui1: qui1,
+                    fil1: fil1,
+                    civ1: civ1,
+                    psi1: psi1,
+                    ing1: ing1,
+
+                    mat2: mat2,
+                    fis2: fis2,
+                    bio2: bio2,
+                    geo2: geo2,
+                    lit2: lit2,
+                    art2: art2,
+                    mus2: mus2,
+                    edu2: edu2,
+                    qui2: qui2,
+                    fil2: fil2,
+                    civ2: civ2,
+                    psi2: psi2,
+                    ing2: ing2,
+
+                    mat3: mat3,
+                    fis3: fis3,
+                    bio3: bio3,
+                    geo3: geo3,
+                    lit3: lit3,
+                    art3: art3,
+                    mus3: mus3,
+                    edu3: edu3,
+                    qui3: qui3,
+                    fil3: fil3,
+                    civ3: civ3,
+                    psi3: psi3,
+                    ing3: ing3,
+
+                    mat4: mat4,
+                    fis4: fis4,
+                    bio4: bio4,
+                    geo4: geo4,
+                    lit4: lit4,
+                    art4: art4,
+                    mus4: mus4,
+                    edu4: edu4,
+                    qui4: qui4,
+                    fil4: fil4,
+                    civ4: civ4,
+                    psi4: psi4,
+                    ing4: ing4
+
+                }, function () {
+                    window.location.href = '/notas';
+                });
+
+                
+
+                window.location.href = '/notas';
+            }else{
+                alert("La fecha de nacimiento no coincide");
+            }
         }else{
-            alert("El estudiante que busca no existe :(");
+            alert("El estudiante que busca no existe.");
         }
         BotonGuardar.removeAttr('disabled').prop('value', 'Buscar'); 
     });
